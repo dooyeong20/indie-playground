@@ -1,8 +1,8 @@
 ### PR
 
-- [ ] Feature
-- [ ] Docs
-- [ ] Setup
-- [ ] Bug Fix
+- Feature
+- Docs
+- Setup
+- Bug Fix
 
 ### Detail
