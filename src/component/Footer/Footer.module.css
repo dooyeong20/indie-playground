@@ -9,7 +9,7 @@
   background-color: var(--color-light-gray);
 }
 .paragraph {
-  font-size: 0.8rem;
+  font-size: 0.65rem;
 }
 @media screen and (min-width: 800px) {
   .container {
