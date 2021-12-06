@@ -5,10 +5,11 @@ import styles from './VContent.module.css';
 export function VContent({ imgPath }: { imgPath: string }) {
   return (
     <div className={cls(styles.container)}>
-      <div
+      <img
+        src={imgPath}
+        alt="임시 이미지 alt"
         className={cls(styles.imageBox)}
-        style={{ background: `center / contain no-repeat url(${imgPath})` }}
-      ></div>
+      />
       <p className={cls(styles.detail)}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi,
         veniam.

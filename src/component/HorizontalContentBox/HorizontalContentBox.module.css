@@ -15,4 +15,7 @@
 }
 
 @media screen and (min-width: 800px) {
+  .container {
+    padding: 0 70px;
+  }
 }
