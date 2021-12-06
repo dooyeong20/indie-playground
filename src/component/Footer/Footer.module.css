@@ -3,12 +3,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  height: 100px;
+  height: 70px;
   padding: 0 20px;
   margin-top: 50px;
   background-color: var(--color-light-gray);
 }
-
 .paragraph {
   font-size: 0.8rem;
+}
+@media screen and (min-width: 800px) {
+  .container {
+    height: 100px;
+  }
 }
