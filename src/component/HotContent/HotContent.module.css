@@ -41,5 +41,9 @@
 @media screen and (min-width: 800px) {
   .container {
     height: 500px;
+    padding: 20px 70px;
+  }
+  .title {
+    font-size: 1.2rem;
   }
 }
