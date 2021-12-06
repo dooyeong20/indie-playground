@@ -29,6 +29,7 @@
   .container {
     width: 50%;
     height: 12vw;
+    margin: 5px 0;
   }
   .title {
     font-size: 1rem;
