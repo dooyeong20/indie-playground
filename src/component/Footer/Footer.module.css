@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100px;
+  padding: 0 20px;
+  background-color: var(--color-light-gray);
+}
+
+.paragraph {
+  font-size: 0.8rem;
+}
