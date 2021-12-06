@@ -1,10 +1,6 @@
 import React from 'react';
-import { Header } from './component';
+import { HomePage } from './view/HomePage';
 
 export function App() {
-  return (
-    <div>
-      <Header />
-    </div>
-  );
+  return <HomePage />;
 }
