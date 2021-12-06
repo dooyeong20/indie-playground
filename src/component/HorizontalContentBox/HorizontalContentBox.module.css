@@ -1,0 +1,18 @@
+.container {
+  padding: 0 20px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contentBox {
+  display: flex;
+  justify-content: space-between;
+}
+.more {
+  font-size: 0.8rem;
+}
+
+@media screen and (min-width: 800px) {
+}
