@@ -1,0 +1,75 @@
+.container {
+  position: sticky;
+  background-color: #fff;
+  top: 0;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logo .highlight {
+  color: var(--color-green);
+}
+
+.navButton {
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.navButton .line {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-black);
+  border-radius: 1px;
+}
+
+.navList {
+  display: none;
+}
+
+.navList > a {
+  cursor: pointer;
+}
+
+.navList .active {
+  color: var(--color-green);
+}
+
+.navList .sign {
+  color: var(--color-pink);
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    position: relative;
+    padding: 30px 70px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .navButton {
+    display: none;
+  }
+
+  .navList {
+    display: flex;
+
+    gap: 3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+}
