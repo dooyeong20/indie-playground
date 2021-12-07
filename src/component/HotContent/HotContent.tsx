@@ -3,41 +3,36 @@ import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 import * as _ from 'lodash';
 import styles from './HotContent.module.css';
 import { cls } from '../../util';
+import { TContent } from '../../@types';
+import { fetchHotContents } from '../../MockDB/hotContents';
+import { Loading } from '..';
 
-interface IProps {
-  contents: string[];
-}
-
-export function HotContent({ contents }: IProps) {
+export function HotContent() {
+  const [contents, setContents] = useState<TContent[]>([]);
   const [carouselIndex, setCarouselIndex] = useState(0);
 
-  const isPrev = (idx: number) =>
-    idx === carouselIndex + contents.length - (1 % contents.length);
-  const isNext = (idx: number) => idx === (carouselIndex + 1) % contents.length;
-  const getCarouselClass = (idx: number) =>
-    carouselIndex === idx
-      ? styles.show
-      : isPrev(idx)
-      ? styles.prev
-      : isNext(idx)
-      ? styles.next
-      : '';
+  const loadHotContents = async () => {
+    const contents = await fetchHotContents();
+    setContents(contents);
+  };
+
+  const handleClickIndicator = (idx: number) => () => setCarouselIndex(idx);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handlePrev = useCallback(
     _.throttle(() => {
       setCarouselIndex((idx) => (idx + contents.length - 1) % contents.length);
     }, 300),
-    []
+    [contents]
   );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleNext = useCallback(
     _.throttle(() => {
       setCarouselIndex((idx) => (idx + 1) % contents.length);
     }, 300),
-    []
+    [contents]
   );
-
   useEffect(() => {
+    loadHotContents();
     const interval = setInterval(() => {
       setCarouselIndex((idx) => (idx + 1) % contents.length);
     }, 3000);
@@ -52,31 +47,36 @@ export function HotContent({ contents }: IProps) {
         <div
           className={cls(styles.imageBox)}
           style={{
-            width: `${contents.length}00%`,
+            width: `${contents.length || 1}00%`,
             transform: `translateX(calc(100% / ${contents.length} * -1 * ${carouselIndex}))`,
           }}
         >
-          {contents.map((path, idx) => (
-            <img
-              key={path}
-              src={path}
-              alt="이미지"
-              className={cls(styles.image, getCarouselClass(idx))}
-              style={{
-                width: `calc(100% / ${contents.length})`,
-              }}
-            />
-          ))}
+          {!contents.length ? (
+            <Loading />
+          ) : (
+            contents.map((item) => (
+              <img
+                key={item.id}
+                src={item.mainImagePath}
+                alt="이미지"
+                className={cls(styles.image)}
+                style={{
+                  width: `calc(100% / ${contents.length})`,
+                }}
+                loading="lazy"
+              />
+            ))
+          )}
         </div>
         <div className={cls(styles.indicatorContainer)}>
-          {contents.map((path, idx) => (
+          {contents.map((item, idx) => (
             <div
-              key={path}
+              key={item.id}
               className={cls(
                 styles.indicator,
                 idx === carouselIndex ? styles.active : ''
               )}
-              onClick={() => setCarouselIndex(idx)}
+              onClick={handleClickIndicator(idx)}
             />
           ))}
         </div>
