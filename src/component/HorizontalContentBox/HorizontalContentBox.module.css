@@ -11,11 +11,17 @@
   justify-content: space-between;
 }
 .more {
-  font-size: 0.8rem;
+  font-size: 0.875rem;
+}
+.title {
+  font-size: 1rem;
 }
 
 @media screen and (min-width: 800px) {
   .container {
     padding: 0 70px;
+  }
+  .title {
+    font-size: 1.5rem;
   }
 }

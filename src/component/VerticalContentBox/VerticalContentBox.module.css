@@ -10,8 +10,18 @@
   display: flex;
   flex-wrap: wrap;
 }
+.title {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+.more {
+  font-size: 0.875rem;
+}
 @media screen and (min-width: 800px) {
   .container {
     padding: 0 70px;
+  }
+  .title {
+    font-size: 1.5rem;
   }
 }
