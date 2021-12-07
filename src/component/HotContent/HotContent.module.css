@@ -1,7 +1,16 @@
+@keyframes blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   width: 100%;
   height: 50vw;
   min-height: 250px;
@@ -15,29 +24,73 @@
   color: var(--color-light-gray);
   margin: 0;
 }
-.imageBox {
-  width: 100%;
+.carousel {
+  height: 50%;
   flex: 1;
-  background: center / contain no-repeat
-    url('https://play-lh.googleusercontent.com/aMlfUmxbKloMNhSP0mHBGhRlNn4GPP6HfYI0aVvweJ47U9ys9KQAHS5lW01EDRUmkNg=w1052-h592-rw');
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+}
+.imageBox {
+  height: 10%;
+  flex: 1;
+  transition: all 0.35s ease-out;
+}
+.image {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  object-fit: contain;
 }
 .indicatorContainer {
-  height: 7px;
+  /* height: 10%; */
   display: flex;
-  gap: 5px;
+  gap: 10px;
   justify-content: center;
 }
 .indicator {
   display: inline-block;
-  width: 7px;
-  height: 7px;
+  width: 10px;
+  height: 10px;
   background-color: #fff;
   border-radius: 50%;
+  transition: all 0.15s ease-out;
+  cursor: pointer;
 }
 .indicator.active {
   width: 25px;
   border-radius: 10px;
 }
+.btn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 60px;
+  height: 80%;
+  font-size: 2rem;
+  color: var(--color-light-gray);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.35s ease-out;
+  animation: blink 1.5s ease-out infinite alternate;
+}
+.carousel:hover .btn {
+  animation: none;
+}
+.btn:hover {
+  opacity: 0.5;
+}
+.prevButton {
+  left: 0;
+}
+.nextButton {
+  right: 0;
+}
+
 @media screen and (min-width: 800px) {
   .container {
     height: 500px;
@@ -45,5 +98,19 @@
   }
   .title {
     font-size: 1.2rem;
+  }
+  .btn {
+    font-size: 2rem;
+    animation: none;
+    opacity: 0;
+  }
+  .carousel:hover .btn {
+    opacity: 1;
+  }
+  .prevButton {
+    left: 20px;
+  }
+  .nextButton {
+    right: 20px;
   }
 }
