@@ -12,7 +12,7 @@ export function HorizontalContentBox({ title, items }: IProps) {
   return (
     <div className={cls(styles.container)}>
       <div className={cls(styles.header)}>
-        <h2>{title}</h2>
+        <h2 className={cls(styles.title)}>{title}</h2>
         <div role="button" className={cls(styles.more)}>
           더보기 +
         </div>

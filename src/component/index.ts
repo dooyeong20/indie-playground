@@ -5,3 +5,4 @@ export * from './HorizontalContentBox/HorizontalContentBox';
 export * from './VerticalContentBox/VerticalContentBox';
 export * from './VContent/VContent';
 export * from './HContent/HContent';
+export * from './Loading/Loading';
