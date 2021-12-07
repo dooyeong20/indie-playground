@@ -1,0 +1,24 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.loader {
+  width: 70px;
+  height: 70px;
+  border: 2px solid var(--color-green);
+  animation: rotate 1.5s ease-in-out infinite;
+}
