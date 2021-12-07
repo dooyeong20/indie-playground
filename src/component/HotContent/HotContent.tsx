@@ -33,12 +33,7 @@ export function HotContent() {
   );
   useEffect(() => {
     loadHotContents();
-    const interval = setInterval(() => {
-      setCarouselIndex((idx) => (idx + 1) % contents.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [contents.length]);
+  }, []);
 
   return (
     <div className={cls(styles.container)}>
