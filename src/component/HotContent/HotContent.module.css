@@ -25,6 +25,7 @@
   margin: 0;
 }
 .carousel {
+  position: relative;
   height: 50%;
   flex: 1;
   display: flex;
@@ -35,7 +36,7 @@
 .imageBox {
   height: 10%;
   flex: 1;
-  transition: all 0.35s ease-out;
+  transition: transform 0.35s ease-out;
 }
 .image {
   position: relative;
@@ -104,7 +105,7 @@
     animation: none;
     opacity: 0;
   }
-  .carousel:hover .btn {
+  .container:hover .btn {
     opacity: 1;
   }
   .prevButton {
