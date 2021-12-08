@@ -1,0 +1,55 @@
+.logo {
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.highlight {
+  color: var(--color-green);
+}
+.active {
+  color: var(--color-green);
+}
+.sign {
+  color: var(--color-pink);
+}
+.mobileNav {
+  position: fixed;
+  padding: 50px 20px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: var(--color-black);
+  color: var(--color-light-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  transition: all 0.3s ease-out;
+}
+.navCloseButton {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  font-weight: 700;
+}
+.mobileNavItemContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.mobileNavItem {
+  display: inline-block;
+  width: 100%;
+  font-size: 1rem;
+  padding: 7px 0;
+}
+.open {
+  transform: translateX(0);
+}
+.notOpen {
+  transform: translateX(100%);
+}
+
+.hidden {
+  display: none;
+}
