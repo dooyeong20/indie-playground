@@ -93,3 +93,5 @@ export function HotContent() {
     </div>
   );
 }
+
+// TODO: 모바일 스와이프 feature
