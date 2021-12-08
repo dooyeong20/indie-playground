@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { TRootState } from '../../store';
 import { VContent } from '..';
+import { EViewMode, TContent } from '../../@types';
+import { fetchPosts } from '../../MockDB/posts';
 import { cls } from '../../util';
 import styles from './HorizontalContentBox.module.css';
 
 interface IProps {
   title: string;
-  items: string[];
 }
 
-export function HorizontalContentBox({ title, items }: IProps) {
+export function HorizontalContentBox({ title }: IProps) {
+  const [contents, setContents] = useState<TContent[]>([]);
+  const viewMode = useSelector((state: TRootState) => state.app.viewMode);
+
+  const loadContents = async () => {
+    const contents = await fetchPosts();
+    setContents(contents);
+  };
+
+  useEffect(() => {
+    loadContents();
+  }, []);
+
   return (
     <div className={cls(styles.container)}>
       <div className={cls(styles.header)}>
@@ -18,9 +33,11 @@ export function HorizontalContentBox({ title, items }: IProps) {
         </div>
       </div>
       <div className={cls(styles.contentBox)}>
-        {items.map((imgPath) => (
-          <VContent key={imgPath} imgPath={imgPath} />
-        ))}
+        {contents
+          .slice(0, viewMode === EViewMode.mobile ? 3 : 5)
+          .map((item) => (
+            <VContent key={item.id} imgPath={item.mainImagePath} />
+          ))}
       </div>
     </div>
   );

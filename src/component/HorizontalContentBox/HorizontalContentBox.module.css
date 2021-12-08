@@ -2,12 +2,14 @@
   padding: 0 20px;
 }
 .header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .contentBox {
   display: flex;
+
   justify-content: space-between;
 }
 .more {
