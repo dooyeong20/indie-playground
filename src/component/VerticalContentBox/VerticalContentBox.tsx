@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HContent } from '..';
+import { TContent } from '../../@types';
+import { fetchReviews } from '../../MockDB/reviews';
 import { cls } from '../../util';
 import styles from './VerticalContentBox.module.css';
 
 interface IProps {
   title: string;
-  items: string[];
 }
 
-export function VerticalContentBox({ title, items }: IProps) {
+export function VerticalContentBox({ title }: IProps) {
+  const [contents, setContents] = useState<TContent[]>([]);
+
+  const loadContents = async () => {
+    const contents = await fetchReviews();
+    setContents(contents);
+  };
+
+  useEffect(() => {
+    loadContents();
+  }, []);
+
   return (
     <div className={cls(styles.container)}>
       <div className={cls(styles.header)}>
@@ -18,8 +30,8 @@ export function VerticalContentBox({ title, items }: IProps) {
         </div>
       </div>
       <div className={cls(styles.contentBox)}>
-        {items.map((imgPath) => (
-          <HContent key={imgPath} imgPath={imgPath} />
+        {contents.map((item) => (
+          <HContent key={item.id} imgPath={item.mainImagePath} />
         ))}
       </div>
     </div>
