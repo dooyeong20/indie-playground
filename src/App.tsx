@@ -6,6 +6,7 @@ import { changeToDesktopView, changeToMobileView } from './store/appSlice';
 import { Footer, Header } from './component';
 import { cls } from './util';
 import styles from './App.module.css';
+import { EPage } from './@types';
 
 export function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export function App() {
     <>
       <Header />
       <main className={cls(styles.mainContainer)}>
-        <ContentsCoverPage />
+        <ContentsCoverPage pageType={EPage.post} />
       </main>
       <Footer />
     </>
