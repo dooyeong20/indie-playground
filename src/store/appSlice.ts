@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { EViewMode, TAppState } from '../@types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { EPage, EViewMode, TAppState } from '../@types';
 
 const initialState: TAppState = {
   viewMode: EViewMode.mobile,
+  currentPage: EPage.home,
 };
 
 export const appSlice = createSlice({
@@ -18,9 +19,16 @@ export const appSlice = createSlice({
     changeToTabletView: (state) => {
       state.viewMode = EViewMode.tablet;
     },
+    changePageTo: (state, action: PayloadAction<EPage>) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { changeToDesktopView, changeToTabletView, changeToMobileView } =
-  appSlice.actions;
+export const {
+  changeToDesktopView,
+  changeToTabletView,
+  changeToMobileView,
+  changePageTo,
+} = appSlice.actions;
 export default appSlice.reducer;
