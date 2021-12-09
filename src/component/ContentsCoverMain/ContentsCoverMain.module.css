@@ -21,6 +21,6 @@
   .contentContainer {
     display: inline-block;
     width: calc(100 / 30 * 10%);
-    padding: 10px 5px;
+    padding: 10px;
   }
 }

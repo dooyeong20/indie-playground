@@ -30,9 +30,6 @@
   word-break: keep-all;
   text-overflow: ellipsis;
 }
-.hScroll {
-  overflow: scroll;
-}
 .form {
   position: relative;
   overflow: hidden;
