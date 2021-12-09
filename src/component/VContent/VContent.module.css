@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
+  width: 100%;
   height: 100%;
 }
 .pictureBox {
@@ -19,13 +19,4 @@
 .detail {
   font-size: 0.8rem;
   overflow: hidden;
-}
-
-@media screen and (min-width: 800px) {
-  .container {
-    width: 18%;
-  }
-  .imageBox {
-    object-fit: contain;
-  }
 }
