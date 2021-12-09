@@ -3,7 +3,7 @@ import {
   HorizontalContentBox,
   HotContent,
   VerticalContentBox,
-} from '../component';
+} from '../../component';
 
 export function HomePage() {
   return (
