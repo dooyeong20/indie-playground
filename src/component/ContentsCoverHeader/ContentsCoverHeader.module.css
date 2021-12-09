@@ -50,9 +50,24 @@
   font-size: 0.75rem;
   display: inline-block;
   width: 100%;
-  padding-left: 22px;
+  padding-left: 30px;
   outline: none;
   border: none;
   border-bottom: 2px solid var(--color-black);
   font-weight: 700;
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    gap: 40px;
+  }
+  .category {
+    font-size: 1.5rem;
+  }
+  .categoryItem {
+    font-size: 0.875rem;
+  }
+  .input {
+    font-size: 1rem;
+  }
 }
