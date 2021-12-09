@@ -1,0 +1,9 @@
+.mainContainer {
+  padding: 0 20px;
+}
+
+@media screen and (min-width: 800px) {
+  .mainContainer {
+    padding: 0 70px;
+  }
+}

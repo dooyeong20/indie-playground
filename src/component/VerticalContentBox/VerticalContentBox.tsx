@@ -22,7 +22,7 @@ export function VerticalContentBox({ title }: IProps) {
   }, []);
 
   return (
-    <div className={cls(styles.container)}>
+    <div>
       <div className={cls(styles.header)}>
         <h2 className={cls(styles.title)}>{title}</h2>
         <div role="button" className={cls(styles.more)}>

@@ -7,10 +7,10 @@ import {
 
 export function HomePage() {
   return (
-    <main>
+    <>
       <HotContent />
       <HorizontalContentBox title="Post" />
       <VerticalContentBox title="Review" />
-    </main>
+    </>
   );
 }

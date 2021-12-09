@@ -4,6 +4,8 @@ import { HomePage } from './view';
 import { useDispatch } from 'react-redux';
 import { changeToDesktopView, changeToMobileView } from './store/appSlice';
 import { Footer, Header } from './component';
+import { cls } from './util';
+import styles from './App.module.css';
 
 export function App() {
   const dispatch = useDispatch();
@@ -22,7 +24,9 @@ export function App() {
   return (
     <>
       <Header />
-      <HomePage />;
+      <main className={cls(styles.mainContainer)}>
+        <HomePage />
+      </main>
       <Footer />
     </>
   );
