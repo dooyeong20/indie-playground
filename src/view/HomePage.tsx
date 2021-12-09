@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  Footer,
-  Header,
   HorizontalContentBox,
   HotContent,
   VerticalContentBox,
@@ -9,14 +7,10 @@ import {
 
 export function HomePage() {
   return (
-    <>
-      <Header />
-      <main>
-        <HotContent />
-        <HorizontalContentBox title="Post" />
-        <VerticalContentBox title="Review" />
-      </main>
-      <Footer />
-    </>
+    <main>
+      <HotContent />
+      <HorizontalContentBox title="Post" />
+      <VerticalContentBox title="Review" />
+    </main>
   );
 }
