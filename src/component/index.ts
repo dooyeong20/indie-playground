@@ -8,3 +8,4 @@ export * from './ContentsCoverHeader/ContentsCoverHeader';
 export * from './VContent/VContent';
 export * from './HContent/HContent';
 export * from './Loading/Loading';
+export * from './ContentsCoverMain/ContentsCoverMain';
