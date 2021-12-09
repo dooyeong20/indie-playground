@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { HomePage } from './view/HomePage';
 import { useDispatch } from 'react-redux';
 import { changeToDesktopView, changeToMobileView } from './store/appSlice';
+import { Footer, Header } from './component';
 
 export function App() {
   const dispatch = useDispatch();
@@ -18,5 +19,11 @@ export function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, [dispatch]);
 
-  return <HomePage />;
+  return (
+    <>
+      <Header />
+      <HomePage />;
+      <Footer />
+    </>
+  );
 }

@@ -14,7 +14,7 @@
   font-weight: 700;
   cursor: pointer;
 }
-.logo .highlight {
+.highlight {
   color: var(--color-green);
 }
 .navButton {
@@ -37,11 +37,14 @@
 .navList > a {
   cursor: pointer;
 }
-.navList .active {
+.active {
   color: var(--color-green);
 }
-.navList .sign {
+.sign {
   color: var(--color-pink);
+}
+.hidden {
+  display: none;
 }
 @media screen and (min-width: 800px) {
   .container {
