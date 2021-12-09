@@ -9,3 +9,18 @@
 .contentContainer {
   width: 80%;
 }
+
+@media screen and (min-width: 800px) {
+  .container {
+    width: 70%;
+    margin: auto;
+    display: block;
+    padding: 15px 0;
+  }
+
+  .contentContainer {
+    display: inline-block;
+    width: calc(100 / 30 * 10%);
+    padding: 10px 5px;
+  }
+}
