@@ -4,6 +4,15 @@ export enum EViewMode {
   mobile = 'mobile',
 }
 
+export enum EPage {
+  home = 'home',
+  post = 'post',
+  review = 'review',
+  signIn = 'signIn',
+  signUp = 'signUp',
+  myPage = 'myPage',
+}
+
 export enum EUserStatus {
   guest = 'guest',
   member = 'member',
@@ -16,4 +25,5 @@ export type TUserState = {
 
 export type TAppState = {
   viewMode: EViewMode;
+  currentPage: EPage;
 };

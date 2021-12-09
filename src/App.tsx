@@ -1,9 +1,12 @@
 import React, { useLayoutEffect } from 'react';
 import * as _ from 'lodash';
-import { HomePage } from './view/HomePage';
+import { ContentsCoverPage } from './view';
 import { useDispatch } from 'react-redux';
 import { changeToDesktopView, changeToMobileView } from './store/appSlice';
 import { Footer, Header } from './component';
+import { cls } from './util';
+import styles from './App.module.css';
+import { EPage } from './@types';
 
 export function App() {
   const dispatch = useDispatch();
@@ -22,7 +25,9 @@ export function App() {
   return (
     <>
       <Header />
-      <HomePage />;
+      <main className={cls(styles.mainContainer)}>
+        <ContentsCoverPage pageType={EPage.post} />
+      </main>
       <Footer />
     </>
   );
