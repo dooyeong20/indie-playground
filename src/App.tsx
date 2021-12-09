@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import * as _ from 'lodash';
-import { HomePage } from './view';
+import { ContentsCoverPage } from './view';
 import { useDispatch } from 'react-redux';
 import { changeToDesktopView, changeToMobileView } from './store/appSlice';
 import { Footer, Header } from './component';
@@ -25,7 +25,7 @@ export function App() {
     <>
       <Header />
       <main className={cls(styles.mainContainer)}>
-        <HomePage />
+        <ContentsCoverPage />
       </main>
       <Footer />
     </>
