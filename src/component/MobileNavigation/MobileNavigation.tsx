@@ -1,11 +1,13 @@
 import React from 'react';
 import { IoArrowForwardCircleOutline } from 'react-icons/io5';
+import { EPage } from '../../@types';
 import { cls } from '../../util';
 import styles from './MobileNavigation.module.css';
 
 interface IProps {
   isOpen: boolean;
   isGuest: boolean;
+  currentPage: EPage;
   onClickSignIn: () => void;
   onClickSignOut: () => void;
   onClickCloseNav: () => void;
@@ -14,6 +16,7 @@ interface IProps {
 export function MobileNavigation({
   isGuest,
   isOpen,
+  currentPage,
   onClickSignIn,
   onClickSignOut,
   onClickCloseNav,
@@ -27,22 +30,46 @@ export function MobileNavigation({
       </a>
       <ul className={cls(styles.mobileNavItemContainer)}>
         <li>
-          <a href="#" className={cls(styles.mobileNavItem, styles.active)}>
+          <a
+            href="#"
+            className={cls(
+              styles.mobileNavItem,
+              currentPage === EPage.home ? styles.active : ''
+            )}
+          >
             Home
           </a>
         </li>
         <li>
-          <a href="#" className={cls(styles.mobileNavItem)}>
+          <a
+            href="#"
+            className={cls(
+              styles.mobileNavItem,
+              currentPage === EPage.post ? styles.active : ''
+            )}
+          >
             Post
           </a>
         </li>
         <li>
-          <a href="#" className={cls(styles.mobileNavItem)}>
+          <a
+            href="#"
+            className={cls(
+              styles.mobileNavItem,
+              currentPage === EPage.review ? styles.active : ''
+            )}
+          >
             Review
           </a>
         </li>
         <li className={isGuest ? styles.hidden : ''}>
-          <a href="#" className={cls(styles.mobileNavItem)}>
+          <a
+            href="#"
+            className={cls(
+              styles.mobileNavItem,
+              currentPage === EPage.myPage ? styles.active : ''
+            )}
+          >
             My Page
           </a>
         </li>
@@ -51,7 +78,8 @@ export function MobileNavigation({
             href="#"
             className={cls(
               styles.mobileNavItem,
-              isGuest ? styles.sign : styles.hidden
+              isGuest ? styles.sign : styles.hidden,
+              currentPage === EPage.signIn ? styles.active : ''
             )}
             onClick={onClickSignIn}
           >
@@ -63,7 +91,8 @@ export function MobileNavigation({
             href="#"
             className={cls(
               styles.mobileNavItem,
-              isGuest ? styles.sign : styles.hidden
+              isGuest ? styles.sign : styles.hidden,
+              currentPage === EPage.signUp ? styles.active : ''
             )}
           >
             Sign Up
