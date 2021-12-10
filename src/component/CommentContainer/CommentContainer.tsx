@@ -1,5 +1,5 @@
 import React from 'react';
-import { IoStar, IoStarOutline } from 'react-icons/io5';
+import { Rating } from '..';
 import { cls } from '../../util';
 import styles from './CommentContainer.module.css';
 
@@ -24,13 +24,7 @@ export function CommentContainer() {
           <span className={cls(styles.authorName)}>Ariana Katelin</span>
           <span className={cls(styles.date)}>2021. 11. 21</span>
         </div>
-        <div className={cls(styles.rating)}>
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStarOutline />
-        </div>
+        <Rating rating={4} />
         <p className={cls(styles.commentText)}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
           nam!
@@ -41,64 +35,7 @@ export function CommentContainer() {
           <span className={cls(styles.authorName)}>Ariana Katelin</span>
           <span className={cls(styles.date)}>2021. 11. 21</span>
         </div>
-        <div className={cls(styles.rating)}>
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStarOutline />
-        </div>
-        <p className={cls(styles.commentText)}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-          nam!
-        </p>
-      </div>
-      <div className={cls(styles.commentBox)}>
-        <div className={cls(styles.commentDetail)}>
-          <span className={cls(styles.authorName)}>Ariana Katelin</span>
-          <span className={cls(styles.date)}>2021. 11. 21</span>
-        </div>
-        <div className={cls(styles.rating)}>
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStarOutline />
-        </div>
-        <p className={cls(styles.commentText)}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-          nam!
-        </p>
-      </div>
-      <div className={cls(styles.commentBox)}>
-        <div className={cls(styles.commentDetail)}>
-          <span className={cls(styles.authorName)}>Ariana Katelin</span>
-          <span className={cls(styles.date)}>2021. 11. 21</span>
-        </div>
-        <div className={cls(styles.rating)}>
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStarOutline />
-        </div>
-        <p className={cls(styles.commentText)}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-          nam!
-        </p>
-      </div>
-      <div className={cls(styles.commentBox)}>
-        <div className={cls(styles.commentDetail)}>
-          <span className={cls(styles.authorName)}>Ariana Katelin</span>
-          <span className={cls(styles.date)}>2021. 11. 21</span>
-        </div>
-        <div className={cls(styles.rating)}>
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStar />
-          <IoStarOutline />
-        </div>
+        <Rating rating={3} />
         <p className={cls(styles.commentText)}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
           nam!
