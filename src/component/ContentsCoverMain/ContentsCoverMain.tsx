@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import _ from 'lodash';
 import { VContent } from '..';
 import { EPage, TContent } from '../../@types';
 import { fetchPosts } from '../../MockDB/posts';
@@ -25,7 +26,10 @@ export function ContentsCoverMain() {
   return (
     <div className={cls(styles.container)}>
       {contents.map((item) => (
-        <div key={item.id} className={cls(styles.contentContainer)}>
+        <div
+          key={_.uniqueId(pageType)}
+          className={cls(styles.contentContainer)}
+        >
           <VContent imgPath={item.mainImagePath} />
         </div>
       ))}

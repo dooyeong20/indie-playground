@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import _ from 'lodash';
 import { TRootState } from '../../store';
 import { VContent } from '..';
 import { EViewMode, TContent } from '../../@types';
@@ -36,7 +37,7 @@ export function HorizontalContentBox({ title }: IProps) {
         {contents
           .slice(0, viewMode === EViewMode.mobile ? 3 : 5)
           .map((item) => (
-            <VContent key={item.id} imgPath={item.mainImagePath} />
+            <VContent key={_.uniqueId()} imgPath={item.mainImagePath} />
           ))}
       </div>
     </div>
