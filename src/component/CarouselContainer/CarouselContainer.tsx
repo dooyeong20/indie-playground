@@ -5,14 +5,14 @@ import { Carousel } from '..';
 import { TContent } from '../../@types';
 
 interface IProps {
-  title: string;
+  title?: string;
   contents: TContent[];
 }
 
 export function CarouselContainer({ contents, title }: IProps) {
   return (
     <div className={cls(styles.container)}>
-      <h2 className={cls(styles.title)}>{title}</h2>
+      <h2 className={cls(styles.title)}>{title || ''}</h2>
       <Carousel contents={contents} />
     </div>
   );
