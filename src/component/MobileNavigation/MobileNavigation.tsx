@@ -1,5 +1,6 @@
 import React from 'react';
 import { IoArrowForwardCircleOutline } from 'react-icons/io5';
+import { NavLink } from 'react-router-dom';
 import { EPage } from '../../@types';
 import { cls } from '../../util';
 import styles from './MobileNavigation.module.css';
@@ -16,7 +17,6 @@ interface IProps {
 export function MobileNavigation({
   isGuest,
   isOpen,
-  currentPage,
   onClickSignIn,
   onClickSignOut,
   onClickCloseNav,
@@ -25,78 +25,78 @@ export function MobileNavigation({
     <nav
       className={cls(styles.mobileNav, !isOpen ? styles.notOpen : styles.open)}
     >
-      <a href="#" className={cls(styles.logo)}>
+      <NavLink to="/" className={cls(styles.logo)}>
         <span className={cls(styles.highlight)}>INDIE</span> Playground
-      </a>
+      </NavLink>
       <ul className={cls(styles.mobileNavItemContainer)}>
         <li>
-          <a
-            href="#"
-            className={cls(
-              styles.mobileNavItem,
-              currentPage === EPage.home ? styles.active : ''
-            )}
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              cls(styles.mobileNavItem, isActive ? styles.active : '')
+            }
           >
             Home
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a
-            href="#"
-            className={cls(
-              styles.mobileNavItem,
-              currentPage === EPage.post ? styles.active : ''
-            )}
+          <NavLink
+            to="posts"
+            className={({ isActive }) =>
+              cls(styles.mobileNavItem, isActive ? styles.active : '')
+            }
           >
             Post
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a
-            href="#"
-            className={cls(
-              styles.mobileNavItem,
-              currentPage === EPage.review ? styles.active : ''
-            )}
+          <NavLink
+            to="/reviews"
+            className={({ isActive }) =>
+              cls(styles.mobileNavItem, isActive ? styles.active : '')
+            }
           >
             Review
-          </a>
+          </NavLink>
         </li>
         <li className={isGuest ? styles.hidden : ''}>
-          <a
-            href="#"
-            className={cls(
-              styles.mobileNavItem,
-              currentPage === EPage.myPage ? styles.active : ''
-            )}
+          <NavLink
+            to="/mypage"
+            className={({ isActive }) =>
+              cls(styles.mobileNavItem, isActive ? styles.active : '')
+            }
           >
             My Page
-          </a>
+          </NavLink>
         </li>
         <li className={isGuest ? '' : styles.hidden}>
-          <a
-            href="#"
-            className={cls(
-              styles.mobileNavItem,
-              isGuest ? styles.sign : styles.hidden,
-              currentPage === EPage.signIn ? styles.active : ''
-            )}
+          <NavLink
+            to="signin"
+            className={({ isActive }) =>
+              cls(
+                styles.mobileNavItem,
+                isGuest ? styles.sign : styles.hidden,
+                isActive ? styles.active : ''
+              )
+            }
             onClick={onClickSignIn}
           >
             Sign In
-          </a>
+          </NavLink>
         </li>
         <li className={isGuest ? '' : styles.hidden}>
-          <a
-            href="#"
-            className={cls(
-              styles.mobileNavItem,
-              isGuest ? styles.sign : styles.hidden,
-              currentPage === EPage.signUp ? styles.active : ''
-            )}
+          <NavLink
+            to="signup"
+            className={({ isActive }) =>
+              cls(
+                styles.mobileNavItem,
+                isGuest ? styles.sign : styles.hidden,
+                isActive ? styles.active : ''
+              )
+            }
           >
             Sign Up
-          </a>
+          </NavLink>
         </li>
         <li className={isGuest ? styles.hidden : ''}>
           <a
