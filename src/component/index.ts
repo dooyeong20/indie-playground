@@ -10,3 +10,5 @@ export * from './HContent/HContent';
 export * from './Loading/Loading';
 export * from './ContentsCoverMain/ContentsCoverMain';
 export * from './Carousel/Carousel';
+export * from './DetailTextContent/DetailTextContent';
+export * from './CommentContainer/CommentContainer';
