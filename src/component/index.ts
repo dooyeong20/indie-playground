@@ -9,3 +9,4 @@ export * from './VContent/VContent';
 export * from './HContent/HContent';
 export * from './Loading/Loading';
 export * from './ContentsCoverMain/ContentsCoverMain';
+export * from './Carousel/Carousel';
