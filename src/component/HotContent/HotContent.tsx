@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import styles from './HotContent.module.css';
 import { cls } from '../../util';
 import { TContent } from '../../@types';
@@ -51,7 +51,7 @@ export function HotContent() {
           ) : (
             contents.map((item) => (
               <img
-                key={item.id}
+                key={_.uniqueId()}
                 src={item.mainImagePath}
                 alt="이미지"
                 className={cls(styles.image)}

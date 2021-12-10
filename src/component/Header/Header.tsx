@@ -6,6 +6,7 @@ import { loginUser, logout } from '../../store/userSlice';
 import { cls } from '../../util';
 import styles from './Header.module.css';
 import { MobileNavigation } from '..';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export function Header() {
   const [isNavOpen, setisNavOpen] = useState(false);
@@ -14,20 +15,25 @@ export function Header() {
     (state: TRootState) => state.app
   );
   const dispatch = useDispatch();
-  const handleClickSignIn = () => {
-    dispatch(loginUser({ status: EUserStatus.member, userName: 'test user' }));
-  };
-  const handleClickSignOut = () => {
-    dispatch(logout());
-  };
+  const navigate = useNavigate();
   const handleClickOpenNav = () => {
     setisNavOpen(true);
   };
   const handleClickCloseNav = () => {
     setisNavOpen(false);
   };
+  const handleClickSignIn = () => {
+    dispatch(loginUser({ status: EUserStatus.member, userName: 'test user' }));
+    handleClickCloseNav();
+  };
+  const handleClickSignOut = () => {
+    dispatch(logout());
+    handleClickCloseNav();
+    navigate('/');
+  };
   const isGuest = () => user.status === EUserStatus.guest;
   const isCurrentPageActive = (page: EPage) => page === currentPage;
+  const mobileNavOpened = viewMode !== EViewMode.desktop && isNavOpen;
 
   return (
     <header className={cls(styles.container)}>
@@ -35,54 +41,58 @@ export function Header() {
         <span className={cls(styles.highlight)}>INDIE</span> Playground
       </a>
       <nav className={cls(styles.navList)}>
-        <a
-          href="#"
-          className={cls(isCurrentPageActive(EPage.home) ? styles.active : '')}
+        <NavLink
+          to="/"
+          className={({ isActive }) => cls(isActive ? styles.active : '')}
         >
           Home
-        </a>
-        <a
-          href="#"
-          className={cls(isCurrentPageActive(EPage.post) ? styles.active : '')}
+        </NavLink>
+        <NavLink
+          to="/posts"
+          className={({ isActive }) => cls(isActive ? styles.active : '')}
         >
           Post
-        </a>
-        <a
-          href="#"
-          className={cls(
-            isCurrentPageActive(EPage.review) ? styles.active : ''
-          )}
+        </NavLink>
+        <NavLink
+          to="/reviews"
+          className={({ isActive }) => cls(isActive ? styles.active : '')}
         >
           Review
-        </a>
-        <a
-          href="#"
-          className={cls(
-            isGuest() ? styles.sign : styles.hidden,
-            isCurrentPageActive(EPage.signIn) ? styles.active : ''
-          )}
+        </NavLink>
+        <NavLink
+          to="/signin"
+          className={({ isActive }) =>
+            cls(
+              isGuest() ? styles.sign : styles.hidden,
+              isActive ? styles.active : ''
+            )
+          }
           onClick={handleClickSignIn}
         >
           Sign In
-        </a>
-        <a
-          href="#"
-          className={cls(
-            isGuest() ? styles.sign : styles.hidden,
-            isCurrentPageActive(EPage.signIn) ? styles.active : ''
-          )}
+        </NavLink>
+        <NavLink
+          to="/signup"
+          className={({ isActive }) =>
+            cls(
+              isGuest() ? styles.sign : styles.hidden,
+              isActive ? styles.active : ''
+            )
+          }
         >
           Sign Up
-        </a>
-        <a
-          href="#"
-          className={cls(
-            isGuest() ? styles.hidden : styles.sign,
-            isCurrentPageActive(EPage.signIn) ? styles.active : ''
-          )}
+        </NavLink>
+        <NavLink
+          to="/signin"
+          className={({ isActive }) =>
+            cls(
+              isGuest() ? styles.hidden : styles.sign,
+              isActive ? styles.active : ''
+            )
+          }
         >
           My Page
-        </a>
+        </NavLink>
         <a
           href="#"
           className={cls(
@@ -104,7 +114,7 @@ export function Header() {
         <div className={cls(styles.line)}></div>
       </div>
       <MobileNavigation
-        isOpen={viewMode !== EViewMode.desktop && isNavOpen}
+        isOpen={mobileNavOpened}
         isGuest={isGuest()}
         currentPage={currentPage}
         onClickCloseNav={handleClickCloseNav}

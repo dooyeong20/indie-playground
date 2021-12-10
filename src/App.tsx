@@ -1,12 +1,13 @@
 import React, { useLayoutEffect } from 'react';
 import * as _ from 'lodash';
-import { ContentsCoverPage } from './view';
+import { ContentsCoverPage, HomePage } from './view';
 import { useDispatch } from 'react-redux';
 import { changeToDesktopView, changeToMobileView } from './store/appSlice';
 import { Footer, Header } from './component';
 import { cls } from './util';
 import styles from './App.module.css';
 import { EPage } from './@types';
+import { Route, Routes } from 'react-router';
 
 export function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,18 @@ export function App() {
     <>
       <Header />
       <main className={cls(styles.mainContainer)}>
-        <ContentsCoverPage pageType={EPage.post} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/posts"
+            element={<ContentsCoverPage pageType={EPage.post} />}
+          />
+          <Route
+            path="/reviews"
+            element={<ContentsCoverPage pageType={EPage.review} />}
+          />
+          <Route path="*" element={<h1>Wrong Page</h1>} />
+        </Routes>
       </main>
       <Footer />
     </>
