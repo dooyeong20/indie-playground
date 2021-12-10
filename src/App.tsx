@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import * as _ from 'lodash';
-import { ContentsCoverPage, HomePage } from './view';
+import { ContentsCoverPage, DetailPage, HomePage } from './view';
 import { useDispatch } from 'react-redux';
 import { changeToDesktopView, changeToMobileView } from './store/appSlice';
 import { Footer, Header } from './component';
@@ -37,6 +37,7 @@ export function App() {
             path="/reviews"
             element={<ContentsCoverPage pageType={EPage.review} />}
           />
+          <Route path="/detail" element={<DetailPage />} />
           <Route path="*" element={<h1>Wrong Page</h1>} />
         </Routes>
       </main>

@@ -6,25 +6,6 @@
     opacity: 0.4;
   }
 }
-.container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100vw;
-  height: 50vw;
-  min-height: 250px;
-  background-color: var(--color-black);
-  padding: 10px 20px;
-  padding-top: 15px;
-  transform: translateX(-20px);
-}
-.title {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  color: var(--color-light-gray);
-  margin: 0;
-}
 .carousel {
   position: relative;
   height: 50%;
@@ -91,14 +72,6 @@
 }
 
 @media screen and (min-width: 800px) {
-  .container {
-    height: 500px;
-    padding: 20px 70px;
-    transform: translateX(-70px);
-  }
-  .title {
-    font-size: 1.2rem;
-  }
   .btn {
     font-size: 2rem;
     animation: none;
@@ -107,7 +80,7 @@
   .btn:hover {
     opacity: 0.5;
   }
-  .container:hover .btn {
+  .carousel:hover .btn {
     opacity: 1;
   }
   .prevButton {

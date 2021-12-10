@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { HContent } from '..';
 import { TContent } from '../../@types';
@@ -31,7 +32,7 @@ export function VerticalContentBox({ title }: IProps) {
       </div>
       <div className={cls(styles.contentBox)}>
         {contents.map((item) => (
-          <HContent key={item.id} imgPath={item.mainImagePath} />
+          <HContent key={_.uniqueId()} imgPath={item.mainImagePath} />
         ))}
       </div>
     </div>
