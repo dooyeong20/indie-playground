@@ -80,7 +80,7 @@
   .btn:hover {
     opacity: 0.5;
   }
-  .container:hover .btn {
+  .carousel:hover .btn {
     opacity: 1;
   }
   .prevButton {
