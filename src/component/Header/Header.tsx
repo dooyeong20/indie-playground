@@ -6,7 +6,7 @@ import { loginUser, logout } from '../../store/userSlice';
 import { cls } from '../../util';
 import styles from './Header.module.css';
 import { MobileNavigation } from '..';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export function Header() {
   const [isNavOpen, setisNavOpen] = useState(false);
@@ -15,20 +15,25 @@ export function Header() {
     (state: TRootState) => state.app
   );
   const dispatch = useDispatch();
-  const handleClickSignIn = () => {
-    dispatch(loginUser({ status: EUserStatus.member, userName: 'test user' }));
-  };
-  const handleClickSignOut = () => {
-    dispatch(logout());
-  };
+  const navigate = useNavigate();
   const handleClickOpenNav = () => {
     setisNavOpen(true);
   };
   const handleClickCloseNav = () => {
     setisNavOpen(false);
   };
+  const handleClickSignIn = () => {
+    dispatch(loginUser({ status: EUserStatus.member, userName: 'test user' }));
+    handleClickCloseNav();
+  };
+  const handleClickSignOut = () => {
+    dispatch(logout());
+    handleClickCloseNav();
+    navigate('/');
+  };
   const isGuest = () => user.status === EUserStatus.guest;
   const isCurrentPageActive = (page: EPage) => page === currentPage;
+  const mobileNavOpened = viewMode !== EViewMode.desktop && isNavOpen;
 
   return (
     <header className={cls(styles.container)}>
@@ -109,7 +114,7 @@ export function Header() {
         <div className={cls(styles.line)}></div>
       </div>
       <MobileNavigation
-        isOpen={viewMode !== EViewMode.desktop && isNavOpen}
+        isOpen={mobileNavOpened}
         isGuest={isGuest()}
         currentPage={currentPage}
         onClickCloseNav={handleClickCloseNav}
