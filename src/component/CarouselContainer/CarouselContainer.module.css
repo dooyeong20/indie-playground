@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 20 px;
   width: 100vw;
   height: 50vw;
   min-height: 250px;

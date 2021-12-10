@@ -1,5 +1,5 @@
 export * from './Header/Header';
-export * from './HotContent/HotContent';
+export * from './CarouselContainer/CarouselContainer';
 export * from './Footer/Footer';
 export * from './HorizontalContentBox/HorizontalContentBox';
 export * from './VerticalContentBox/VerticalContentBox';
