@@ -1,3 +1,5 @@
+import { TContent } from '.';
+
 export enum EViewMode {
   desktop = 'desktop',
   tablet = 'tablet',
@@ -26,4 +28,9 @@ export type TUserState = {
 export type TAppState = {
   viewMode: EViewMode;
   currentPage: EPage;
+};
+
+export type TContentState = {
+  posts: TContent[];
+  reviews: TContent[];
 };
