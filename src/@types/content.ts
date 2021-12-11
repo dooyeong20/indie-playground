@@ -1,9 +1,10 @@
-export type TContent = {
-  id: number;
-  mainImagePath: string;
-};
-
 export enum EContentType {
   post = 'post',
   review = 'review',
 }
+
+export type TContent = {
+  id: number;
+  type: EContentType;
+  mainImagePath: string;
+};

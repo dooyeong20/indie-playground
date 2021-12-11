@@ -1,4 +1,5 @@
 import React from 'react';
+import { EContentType } from '../../@types';
 import {
   CarouselContainer,
   CommentContainer,
@@ -12,11 +13,13 @@ export function DetailPage() {
         contents={[
           {
             id: 1,
+            type: EContentType.review,
             mainImagePath:
               'https://i.ytimg.com/vi/HtOGr6vr9eU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDZ2b8vMOexjPBY9ypp-iF9HOf69Q',
           },
           {
             id: 2,
+            type: EContentType.post,
             mainImagePath:
               'https://i.ytimg.com/vi/cxfyPzjNxLA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDFMUjZYSaUqHNZusqFUWhPSegPFg',
           },
