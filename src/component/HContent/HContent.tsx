@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { cls } from '../../util';
 import styles from './HContent.module.css';
 
@@ -8,7 +9,7 @@ interface IProps {
 
 export function HContent({ imgPath }: IProps) {
   return (
-    <div className={cls(styles.container)}>
+    <Link to="detail/438" className={cls(styles.container)}>
       <img src={imgPath} alt="앱 이미지" className={cls(styles.image)} />
       <div className={cls(styles.detail)}>
         <span className={cls(styles.title)}>임시 타이틀</span>
@@ -22,6 +23,6 @@ export function HContent({ imgPath }: IProps) {
           ) + '...'}
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
