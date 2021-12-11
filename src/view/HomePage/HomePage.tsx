@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { TContent } from '../../@types';
 import {
   HorizontalContentBox,
@@ -6,32 +7,37 @@ import {
   VerticalContentBox,
 } from '../../component';
 import { getPosts, getReviews } from '../../DB';
+import { TRootState } from '../../store';
+import { cacheContents } from '../../store/contentSlice';
 
 export function HomePage() {
-  const [reviews, setReviews] = useState<TContent[]>([]);
-  const [posts, setPosts] = useState<TContent[]>([]);
+  const { reviews, posts } = useSelector((state: TRootState) => state.content);
+  const dispatch = useDispatch();
 
-  const loadContents = async () => {
+  const loadContents = useCallback(async () => {
+    if (reviews.length && posts.length) {
+      return;
+    }
+
     const reviewList: TContent[] = [];
     const postList: TContent[] = [];
-
     const [reviewSnap, postSnap] = await Promise.all([
       getReviews(5),
       getPosts(5),
     ]);
+
     reviewSnap.forEach((doc) => {
       reviewList.push(doc.data() as TContent);
     });
     postSnap.forEach((doc) => {
       postList.push(doc.data() as TContent);
     });
-    setReviews(reviewList);
-    setPosts(postList);
-  };
+    dispatch(cacheContents({ posts: postList, reviews: reviewList }));
+  }, [dispatch, posts, reviews]);
 
   useEffect(() => {
     loadContents();
-  }, []);
+  }, [loadContents]);
 
   return (
     <>
