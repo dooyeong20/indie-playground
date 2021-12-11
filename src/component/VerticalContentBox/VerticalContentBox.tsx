@@ -20,7 +20,7 @@ export function VerticalContentBox({ title, contents }: IProps) {
         </div>
       </div>
       <div className={cls(styles.contentBox)}>
-        {contents.map((item) => (
+        {contents.slice(0, 10).map((item) => (
           <HContent key={_.uniqueId()} imgPath={item.mainImagePath} />
         ))}
       </div>
