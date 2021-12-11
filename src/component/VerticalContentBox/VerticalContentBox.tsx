@@ -1,27 +1,16 @@
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { HContent } from '..';
 import { TContent } from '../../@types';
-import { fetchReviews } from '../../MockDB/reviews';
 import { cls } from '../../util';
 import styles from './VerticalContentBox.module.css';
 
 interface IProps {
   title: string;
+  contents: TContent[];
 }
 
-export function VerticalContentBox({ title }: IProps) {
-  const [contents, setContents] = useState<TContent[]>([]);
-
-  const loadContents = async () => {
-    const contents = await fetchReviews();
-    setContents(contents);
-  };
-
-  useEffect(() => {
-    loadContents();
-  }, []);
-
+export function VerticalContentBox({ title, contents }: IProps) {
   return (
     <div className={cls(styles.container)}>
       <div className={cls(styles.header)}>

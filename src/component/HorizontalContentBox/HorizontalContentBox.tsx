@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { TRootState } from '../../store';
 import { VContent } from '..';
 import { EViewMode, TContent } from '../../@types';
-import { fetchPosts } from '../../MockDB/posts';
 import { cls } from '../../util';
 import styles from './HorizontalContentBox.module.css';
 
 interface IProps {
   title: string;
+  contents: TContent[];
 }
 
-export function HorizontalContentBox({ title }: IProps) {
-  const [contents, setContents] = useState<TContent[]>([]);
+export function HorizontalContentBox({ title, contents }: IProps) {
   const viewMode = useSelector((state: TRootState) => state.app.viewMode);
-
-  const loadContents = async () => {
-    const contents = await fetchPosts();
-    setContents(contents);
-  };
-
-  useEffect(() => {
-    loadContents();
-  }, []);
 
   return (
     <div className={cls(styles.container)}>
