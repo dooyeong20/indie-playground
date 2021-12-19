@@ -5,14 +5,15 @@ import styles from './HContent.module.css';
 
 interface IProps {
   imgPath: string;
+  title: string;
 }
 
-export function HContent({ imgPath }: IProps) {
+export function HContent({ imgPath, title }: IProps) {
   return (
     <Link to="detail/438" className={cls(styles.container)}>
       <img src={imgPath} alt="앱 이미지" className={cls(styles.image)} />
       <div className={cls(styles.detail)}>
-        <span className={cls(styles.title)}>임시 타이틀</span>
+        <span className={cls(styles.title)}>{title}</span>
         <span className={cls(styles.rating)}>9.6 / 10</span>
         <span className={cls(styles.review)}>
           {`Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
