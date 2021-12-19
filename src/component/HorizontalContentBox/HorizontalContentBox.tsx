@@ -27,7 +27,11 @@ export function HorizontalContentBox({ title, contents }: IProps) {
         {contents
           .slice(0, viewMode === EViewMode.mobile ? 3 : 5)
           .map((item) => (
-            <VContent key={_.uniqueId()} imgPath={item.mainImagePath} />
+            <VContent
+              key={_.uniqueId()}
+              id={item.id}
+              imgPath={item.mainImagePath}
+            />
           ))}
       </div>
     </div>

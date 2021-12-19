@@ -37,7 +37,7 @@ export function App() {
             path="/reviews"
             element={<ContentsCoverPage pageType={EPage.review} />}
           />
-          <Route path="/detail" element={<DetailPage />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="*" element={<h1>Wrong Page</h1>} />
         </Routes>
       </main>

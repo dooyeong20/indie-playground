@@ -30,7 +30,7 @@ export function ContentsCoverMain() {
           key={_.uniqueId(pageType)}
           className={cls(styles.contentContainer)}
         >
-          <VContent imgPath={item.mainImagePath} />
+          <VContent id={item.id} imgPath={item.mainImagePath} />
         </div>
       ))}
     </div>

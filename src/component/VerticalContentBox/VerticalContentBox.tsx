@@ -23,6 +23,7 @@ export function VerticalContentBox({ title, contents }: IProps) {
         {contents.slice(0, 10).map((item) => (
           <HContent
             key={_.uniqueId()}
+            id={item.id}
             imgPath={item.mainImagePath}
             title={item.title}
           />
