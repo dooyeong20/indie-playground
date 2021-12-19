@@ -4,6 +4,7 @@ export enum EContentType {
 }
 
 export type TContent = {
+  id: string;
   title: string;
   mainImagePath: string;
 };
