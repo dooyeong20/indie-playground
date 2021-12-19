@@ -24,6 +24,7 @@ export function VerticalContentBox({ title, contents }: IProps) {
           <HContent
             key={_.uniqueId()}
             id={item.id}
+            type={item.type}
             imgPath={item.mainImagePath}
             title={item.title}
           />

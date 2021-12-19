@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { EContentType } from '../../@types';
 import { cls } from '../../util';
 import styles from './VContent.module.css';
 
 interface IProps {
   id: string;
+  type: EContentType;
   imgPath: string;
 }
 
-export function VContent({ id, imgPath }: IProps) {
+export function VContent({ id, type, imgPath }: IProps) {
   return (
-    <Link to={`/detail/${id}`} className={cls(styles.container)}>
+    <Link to={`/detail/${type}/${id}`} className={cls(styles.container)}>
       <picture className={cls(styles.pictureBox)}>
         <img
           src={imgPath}

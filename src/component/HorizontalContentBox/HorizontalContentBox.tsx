@@ -30,6 +30,7 @@ export function HorizontalContentBox({ title, contents }: IProps) {
             <VContent
               key={_.uniqueId()}
               id={item.id}
+              type={item.type}
               imgPath={item.mainImagePath}
             />
           ))}

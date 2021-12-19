@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { EContentType } from '../../@types';
 import { cls } from '../../util';
 import styles from './HContent.module.css';
 
@@ -7,11 +8,12 @@ interface IProps {
   id: string;
   imgPath: string;
   title: string;
+  type: EContentType;
 }
 
-export function HContent({ id, imgPath, title }: IProps) {
+export function HContent({ id, type, imgPath, title }: IProps) {
   return (
-    <Link to={`detail/${id}`} className={cls(styles.container)}>
+    <Link to={`detail/${type}/${id}`} className={cls(styles.container)}>
       <img src={imgPath} alt="앱 이미지" className={cls(styles.image)} />
       <div className={cls(styles.detail)}>
         <span className={cls(styles.title)}>{title}</span>

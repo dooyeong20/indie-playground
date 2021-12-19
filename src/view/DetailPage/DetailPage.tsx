@@ -7,10 +7,12 @@ import {
   DetailTextContent,
 } from '../../component';
 
-type TDetailPageParam = 'id';
+type TDetailPageParam = 'id' | 'category';
 
 export function DetailPage() {
-  const { id } = useParams<TDetailPageParam>();
+  const { id, category } = useParams<TDetailPageParam>();
+
+  console.log(id, category);
 
   return (
     <>
