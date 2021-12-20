@@ -10,26 +10,38 @@ import {
 import { db } from '../firebase-config';
 
 const detailCache = new Map<string, Promise<QuerySnapshot<DocumentData>>>();
+const reviewsCache = new Map<string, Promise<QuerySnapshot<DocumentData>>>();
+const postsCache = new Map<string, Promise<QuerySnapshot<DocumentData>>>();
 
 export const getReviews = async (count: number) => {
-  console.log('getting reviews ...');
+  if (reviewsCache.has(count + '')) {
+    console.log('[cached] reviews!');
+    return reviewsCache.get(count + '');
+  }
+  console.log('[fresh] reviews ...');
   const q = query(collection(db, 'review'), limit(count));
-  return getDocs(q);
+  reviewsCache.set(count + '', getDocs(q));
+  return reviewsCache.get(count + '');
 };
 
 export const getPosts = async (count: number) => {
-  console.log('getting posts ...');
+  if (postsCache.has(count + '')) {
+    console.log('[cached] posts ...');
+    return postsCache.get(count + '');
+  }
+  console.log('[fresh] posts ...');
   const q = query(collection(db, 'post'), limit(count));
-  return getDocs(q);
+  postsCache.set(count + '', getDocs(q));
+  return postsCache.get(count + '');
 };
 
 export const getDetail = async (category: string, id: string) => {
   if (detailCache.has(id)) {
-    console.log('getting cached detail!');
+    console.log('[cached] detail!');
     return detailCache.get(id);
   }
 
-  console.log('getting fresh detail!');
+  console.log('[fresh] detail!');
   const q = query(collection(db, category), where('id', '==', id));
 
   detailCache.set(id, getDocs(q));
