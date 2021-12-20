@@ -1,10 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { EContentType } from '../../@types';
 import { cls } from '../../util';
 import styles from './VContent.module.css';
 
-export function VContent({ imgPath }: { imgPath: string }) {
+interface IProps {
+  id: string;
+  type: EContentType;
+  imgPath: string;
+}
+
+export function VContent({ id, type, imgPath }: IProps) {
   return (
-    <div className={cls(styles.container)}>
+    <Link to={`/detail/${type}/${id}`} className={cls(styles.container)}>
       <picture className={cls(styles.pictureBox)}>
         <img
           src={imgPath}
@@ -16,6 +24,6 @@ export function VContent({ imgPath }: { imgPath: string }) {
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi,
         veniam.
       </p>
-    </div>
+    </Link>
   );
 }

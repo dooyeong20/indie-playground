@@ -1,17 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { EContentType } from '../../@types';
 import { cls } from '../../util';
 import styles from './HContent.module.css';
 
 interface IProps {
+  id: string;
   imgPath: string;
+  title: string;
+  type: EContentType;
 }
 
-export function HContent({ imgPath }: IProps) {
+export function HContent({ id, type, imgPath, title }: IProps) {
   return (
-    <div className={cls(styles.container)}>
+    <Link to={`detail/${type}/${id}`} className={cls(styles.container)}>
       <img src={imgPath} alt="앱 이미지" className={cls(styles.image)} />
       <div className={cls(styles.detail)}>
-        <span className={cls(styles.title)}>임시 타이틀</span>
+        <span className={cls(styles.title)}>{title}</span>
         <span className={cls(styles.rating)}>9.6 / 10</span>
         <span className={cls(styles.review)}>
           {`Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis,
@@ -22,6 +27,6 @@ export function HContent({ imgPath }: IProps) {
           ) + '...'}
         </span>
       </div>
-    </div>
+    </Link>
   );
 }

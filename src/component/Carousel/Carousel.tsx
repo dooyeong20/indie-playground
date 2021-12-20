@@ -57,7 +57,7 @@ export function Carousel({ contents }: IProps) {
       <div className={cls(styles.indicatorContainer)}>
         {contents.map((item, idx) => (
           <div
-            key={item.id}
+            key={_.uniqueId()}
             className={cls(
               styles.indicator,
               idx === carouselIndex ? styles.active : ''
