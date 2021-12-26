@@ -7,6 +7,7 @@ import { cls } from '../../util';
 import styles from './Header.module.css';
 import { MobileNavigation } from '..';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth';
 
 export function Header() {
   const [isNavOpen, setisNavOpen] = useState(false);
@@ -14,6 +15,7 @@ export function Header() {
   const { viewMode, currentPage } = useSelector(
     (state: TRootState) => state.app
   );
+  const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClickOpenNav = () => {
@@ -26,6 +28,7 @@ export function Header() {
     handleClickCloseNav();
   };
   const handleClickSignOut = () => {
+    signOut(auth);
     dispatch(logout());
     handleClickCloseNav();
     navigate('/');
