@@ -3,7 +3,8 @@ import { EUserStatus, TUserState } from '../@types';
 
 const initialState: TUserState = {
   status: EUserStatus.guest,
-  userName: '',
+  displayName: '',
+  email: '',
 };
 
 export const userSlice = createSlice({
@@ -12,11 +13,14 @@ export const userSlice = createSlice({
   reducers: {
     loginUser: (state, action: PayloadAction<TUserState>) => {
       state.status = action.payload.status;
-      state.userName = action.payload.userName;
+      state.displayName = action.payload.displayName;
+      state.email = action.payload.email;
     },
     logout: (state) => {
-      state.status = EUserStatus.guest;
-      state.userName = '';
+      const { status, displayName, email } = initialState;
+      state.status = status;
+      state.displayName = displayName;
+      state.email = email;
     },
   },
 });
