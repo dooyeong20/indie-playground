@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EPage, EUserStatus, EViewMode } from '../../@types';
 import { TRootState } from '../../store';
-import { loginUser, logout } from '../../store/userSlice';
+import { logout } from '../../store/userSlice';
 import { cls } from '../../util';
 import styles from './Header.module.css';
 import { MobileNavigation } from '..';
@@ -23,7 +23,6 @@ export function Header() {
     setisNavOpen(false);
   };
   const handleClickSignIn = () => {
-    dispatch(loginUser({ status: EUserStatus.member, userName: 'test user' }));
     handleClickCloseNav();
   };
   const handleClickSignOut = () => {
