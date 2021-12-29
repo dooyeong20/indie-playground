@@ -1,9 +1,11 @@
 .mainContainer {
   padding: 0 20px;
+  min-height: calc(100vh - 59px - 120px);
 }
 
 @media screen and (min-width: 800px) {
   .mainContainer {
     padding: 0 70px;
+    min-height: calc(100vh - 87px - 150px);
   }
 }
