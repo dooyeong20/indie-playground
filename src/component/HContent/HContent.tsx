@@ -13,7 +13,7 @@ interface IProps {
 
 export function HContent({ id, type, imgPath, title }: IProps) {
   return (
-    <Link to={`detail/${type}/${id}`} className={cls(styles.container)}>
+    <Link to={`/detail/${type}/${id}`} className={cls(styles.container)}>
       <img src={imgPath} alt="앱 이미지" className={cls(styles.image)} />
       <div className={cls(styles.detail)}>
         <span className={cls(styles.title)}>{title}</span>
