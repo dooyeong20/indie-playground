@@ -11,6 +11,7 @@
 }
 .buttonContainer {
   margin: auto;
-  padding: 2rem 1rem;
+  padding: 2rem 0;
   width: 90%;
+  min-width: 205px;
 }

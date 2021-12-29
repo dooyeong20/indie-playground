@@ -1,16 +1,20 @@
 .siginButton {
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
-  font-size: 0.875rem;
+  font-size: 0.5rem;
   font-weight: 700;
-  background-color: antiquewhite;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 2px 0px;
+  border-radius: 5px;
+}
+.siginButton:hover {
+  background-color: rgb(245, 245, 245);
 }
 .siginButton .logo {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-right: 1rem;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-right: 0.5rem;
 }
 .siginButton .title {
   text-align: center;
