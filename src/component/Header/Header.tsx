@@ -39,9 +39,9 @@ export function Header() {
 
   return (
     <header className={cls(styles.container)}>
-      <a href="#" className={cls(styles.logo)}>
+      <NavLink to="/" className={cls(styles.logo)}>
         <span className={cls(styles.highlight)}>INDIE</span> Playground
-      </a>
+      </NavLink>
       <nav className={cls(styles.navList)}>
         <NavLink
           to="/"
