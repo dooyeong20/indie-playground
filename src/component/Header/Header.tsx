@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EPage, EUserStatus, EViewMode } from '../../@types';
 import { TRootState } from '../../store';
-import { loginUser, logout } from '../../store/userSlice';
+import { logout } from '../../store/userSlice';
 import { cls } from '../../util';
 import styles from './Header.module.css';
 import { MobileNavigation } from '..';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth';
 
 export function Header() {
   const [isNavOpen, setisNavOpen] = useState(false);
@@ -14,6 +15,7 @@ export function Header() {
   const { viewMode, currentPage } = useSelector(
     (state: TRootState) => state.app
   );
+  const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClickOpenNav = () => {
@@ -23,10 +25,10 @@ export function Header() {
     setisNavOpen(false);
   };
   const handleClickSignIn = () => {
-    dispatch(loginUser({ status: EUserStatus.member, userName: 'test user' }));
     handleClickCloseNav();
   };
   const handleClickSignOut = () => {
+    signOut(auth);
     dispatch(logout());
     handleClickCloseNav();
     navigate('/');
@@ -83,7 +85,7 @@ export function Header() {
           Sign Up
         </NavLink>
         <NavLink
-          to="/signin"
+          to="/mypage"
           className={({ isActive }) =>
             cls(
               isGuest() ? styles.hidden : styles.sign,

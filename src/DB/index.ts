@@ -6,6 +6,7 @@ import {
   query,
   QuerySnapshot,
   where,
+  addDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
@@ -46,4 +47,19 @@ export const getDetail = async (category: string, id: string) => {
 
   detailCache.set(id, getDocs(q));
   return detailCache.get(id);
+};
+
+export const signinUser = async (username: string, email: string) => {
+  const q = query(collection(db, 'user'), where('username', '==', username));
+  const qSnap = await getDocs(q);
+  if (!qSnap.empty) {
+    console.log(`${qSnap.docs[0].data().username} already exists!`);
+    return;
+  }
+  const docRef = await addDoc(collection(db, 'user'), {
+    username,
+    email,
+  });
+
+  console.log(`${docRef.id} saved!`);
 };

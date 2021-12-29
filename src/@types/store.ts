@@ -22,7 +22,8 @@ export enum EUserStatus {
 
 export type TUserState = {
   status: EUserStatus;
-  userName: string;
+  displayName: string;
+  email: string;
 };
 
 export type TAppState = {

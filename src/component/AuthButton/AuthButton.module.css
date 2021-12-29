@@ -1,0 +1,22 @@
+.siginButton {
+  cursor: pointer;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  font-size: 0.5rem;
+  font-weight: 700;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 2px 0px;
+  border-radius: 5px;
+}
+.siginButton:hover {
+  background-color: rgb(245, 245, 245);
+}
+.siginButton .logo {
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-right: 0.5rem;
+}
+.siginButton .title {
+  text-align: center;
+  flex: 1;
+}

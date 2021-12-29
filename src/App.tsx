@@ -1,16 +1,38 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import * as _ from 'lodash';
-import { ContentsCoverPage, DetailPage, HomePage } from './view';
+import { ContentsCoverPage, DetailPage, HomePage, MyPage } from './view';
 import { useDispatch } from 'react-redux';
 import { changeToDesktopView, changeToMobileView } from './store/appSlice';
 import { Footer, Header } from './component';
 import { cls } from './util';
 import styles from './App.module.css';
-import { EPage } from './@types';
+import { EPage, EUserStatus } from './@types';
 import { Route, Routes } from 'react-router';
+import SigninPage from './view/SigninPage/SigninPage';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { loginUser } from './store/userSlice';
 
 export function App() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(getAuth(), (user) => {
+      if (user) {
+        const { displayName, email } = user;
+        dispatch(
+          loginUser({
+            status: EUserStatus.member,
+            displayName: displayName ?? 'no name',
+            email: email ?? 'no email',
+          })
+        );
+      } else {
+        // not signed in
+        console.log('not signed in');
+      }
+    });
+  }, [dispatch]);
+
   useLayoutEffect(() => {
     dispatch(
       window.innerWidth < 800 ? changeToMobileView() : changeToDesktopView()
@@ -37,6 +59,8 @@ export function App() {
             path="/reviews"
             element={<ContentsCoverPage pageType={EPage.review} />}
           />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/signin" element={<SigninPage />} />
           <Route path="/detail/:category/:id" element={<DetailPage />} />
           <Route path="*" element={<h1>Wrong Page</h1>} />
         </Routes>
