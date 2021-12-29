@@ -8,11 +8,15 @@ import {
   where,
   addDoc,
 } from 'firebase/firestore';
+import { TContent } from '../@types';
 import { db } from '../firebase-config';
 
 const detailCache = new Map<string, Promise<QuerySnapshot<DocumentData>>>();
 const reviewsCache = new Map<string, Promise<QuerySnapshot<DocumentData>>>();
 const postsCache = new Map<string, Promise<QuerySnapshot<DocumentData>>>();
+const myCache: {
+  [key in string]: { posts: TContent[] | null; reviews: TContent[] | null };
+} = {};
 
 export const getReviews = async (count: number) => {
   if (reviewsCache.has(count + '')) {
@@ -34,6 +38,44 @@ export const getPosts = async (count: number) => {
   const q = query(collection(db, 'post'), limit(count));
   postsCache.set(count + '', getDocs(q));
   return postsCache.get(count + '');
+};
+
+export const getMyPosts = async (email: string) => {
+  if (myCache[email]?.posts) {
+    console.log('[cache] my posts');
+    return myCache[email].posts;
+  }
+  const posts: TContent[] = [];
+  const q = query(collection(db, 'post'), where('authorEmail', '==', email));
+  (await getDocs(q)).forEach((doc) => {
+    posts.push(doc.data() as TContent);
+  });
+  if (myCache[email]) {
+    myCache[email].posts = posts;
+  } else {
+    myCache[email] = { posts, reviews: null };
+  }
+  console.log('[fresh] my posts');
+  return myCache[email].posts;
+};
+
+export const getMyReviews = async (email: string) => {
+  if (myCache[email]?.reviews) {
+    console.log('[cache] my reviews');
+    return myCache[email].reviews;
+  }
+  const reviews: TContent[] = [];
+  const q = query(collection(db, 'review'), where('authorEmail', '==', email));
+  (await getDocs(q)).forEach((doc) => {
+    reviews.push(doc.data() as TContent);
+  });
+  if (myCache[email]) {
+    myCache[email].reviews = reviews;
+  } else {
+    myCache[email] = { posts: null, reviews };
+  }
+  console.log('[fresh ] my reviews');
+  return myCache[email].reviews;
 };
 
 export const getDetail = async (category: string, id: string) => {
