@@ -1,4 +1,5 @@
 export enum EContentType {
+  all = 'all',
   post = 'post',
   review = 'review',
 }

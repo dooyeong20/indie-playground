@@ -9,7 +9,6 @@ import { AuthButton } from '../../component';
 import { ReactComponent as GoogleLogo } from '../../assets/googleLogo.svg';
 import { useNavigate } from 'react-router-dom';
 import { signinUser } from '../../DB';
-import gammingPath from '../../assets/gamming.webp';
 
 export default function SigninPage() {
   const auth = getAuth();
