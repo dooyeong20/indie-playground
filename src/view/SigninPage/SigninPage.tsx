@@ -29,7 +29,7 @@ export default function SigninPage() {
         loginUser({
           status: EUserStatus.member,
           displayName: displayName,
-          email: email ?? 'no email',
+          email: email,
         })
       );
       signinUser(displayName, email);
