@@ -62,7 +62,12 @@ export function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/signin" element={<SigninPage />} />
           <Route path="/detail/:category/:id" element={<DetailPage />} />
-          <Route path="*" element={<h1>Wrong Page</h1>} />
+          <Route
+            path="*"
+            element={
+              <h1 style={{ margin: 0, textAlign: 'center' }}>Wrong Page</h1>
+            }
+          />
         </Routes>
       </main>
       <Footer />

@@ -7,7 +7,7 @@ export const store = configureStore({
     app: appReducer,
     user: userReducer,
   },
-  devTools: true,
+  devTools: process.env.NODE_ENV === 'development',
 });
 
 export type TRootState = ReturnType<typeof store.getState>;
