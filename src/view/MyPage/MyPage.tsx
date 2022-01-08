@@ -81,15 +81,15 @@ export function MyPage() {
       </div>
 
       {filter === EContentType.post && (
-        <VerticalContentBox title="Post" contents={posts} />
+        <VerticalContentBox title={EContentType.post} contents={posts} />
       )}
       {filter === EContentType.review && (
-        <VerticalContentBox title="Review" contents={reviews} />
+        <VerticalContentBox title={EContentType.review} contents={reviews} />
       )}
       {filter === EContentType.all && (
         <>
-          <VerticalContentBox title="Post" contents={posts} />
-          <VerticalContentBox title="Review" contents={reviews} />
+          <VerticalContentBox title={EContentType.post} contents={posts} />
+          <VerticalContentBox title={EContentType.review} contents={reviews} />
         </>
       )}
     </div>
