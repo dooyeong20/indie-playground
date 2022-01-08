@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { TContent } from '../../@types';
+import { EContentType, TContent } from '../../@types';
 import {
   HorizontalContentBox,
   CarouselContainer,
@@ -36,8 +36,8 @@ export function HomePage() {
   return (
     <>
       <CarouselContainer title="HOT" contents={reviews} />
-      <HorizontalContentBox title="Post" contents={posts} />
-      <VerticalContentBox title="Review" contents={reviews} />
+      <HorizontalContentBox title={EContentType.post} contents={posts} />
+      <VerticalContentBox title={EContentType.review} contents={reviews} />
     </>
   );
 }
