@@ -1,6 +1,12 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 import * as _ from 'lodash';
-import { ContentsCoverPage, DetailPage, HomePage, MyPage } from './view';
+import {
+  ContentsCoverPage,
+  DetailPage,
+  HomePage,
+  MyPage,
+  WritePage,
+} from './view';
 import { useDispatch } from 'react-redux';
 import { changeToDesktopView, changeToMobileView } from './store/appSlice';
 import { Footer, Header } from './component';
@@ -60,6 +66,7 @@ export function App() {
             element={<ContentsCoverPage pageType={EPage.review} />}
           />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/write" element={<WritePage />} />
           <Route path="/signin" element={<SigninPage />} />
           <Route path="/detail/:category/:id" element={<DetailPage />} />
           <Route

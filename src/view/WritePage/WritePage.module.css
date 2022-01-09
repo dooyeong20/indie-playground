@@ -1,0 +1,108 @@
+.container {
+  padding: 0 0.5rem;
+}
+.heading {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.catContainer {
+  margin: 1.25rem 0;
+  display: flex;
+  align-items: center;
+}
+.cat {
+  margin-right: 1rem;
+  font-weight: 700;
+}
+.picTitle {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.buttons {
+  display: inline-flex;
+}
+.button {
+  cursor: pointer;
+  padding: 0.25rem 1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-weight: 700;
+  /* box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.1); */
+}
+.button:not(:last-child) {
+  margin-right: 0.5rem;
+}
+.button.active {
+  background-color: black;
+  color: #fff;
+  border: none;
+}
+.inputTitle {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+  flex: 1;
+  height: 1.25rem;
+}
+.picContainer {
+  overflow-x: auto;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: var(--color-black);
+  border-radius: 10px;
+}
+.noflex {
+  display: block;
+}
+.scrollLongBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: auto;
+}
+.fileUpload {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  color: #fff;
+}
+.fileInput {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+.preview {
+  display: inline-block;
+  width: 130px;
+}
+.imgWrapper {
+  position: relative;
+  padding-bottom: 100%;
+  background: black;
+  border-radius: 10px;
+}
+.previewImg {
+  position: absolute;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.contentArea {
+  width: 100%;
+  height: 30vh;
+  outline: none;
+  border-radius: 5px;
+}
+.writeButton {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: auto;
+  background-color: #4dbc7c;
+  font-weight: 700;
+  color: #fff;
+}
