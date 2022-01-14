@@ -9,7 +9,14 @@ import { uniqueId } from 'lodash';
 import { useSelector } from 'react-redux';
 import { TRootState } from '../../store';
 import { EContentType } from '../../@types';
-import { getStorage, ref, uploadBytes, UploadResult } from 'firebase//storage';
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  StorageReference,
+  uploadBytes,
+  UploadResult,
+} from 'firebase//storage';
 import { addContent } from '../../DB';
 
 export function WritePage() {
@@ -50,23 +57,28 @@ export function WritePage() {
     const storage = getStorage();
 
     try {
+      const imgRefList: StorageReference[] = [];
       const uploadPromiseList: Promise<UploadResult>[] = [];
-      const imgPaths: string[] = [];
 
-      images.forEach(({ file }) => {
+      images.forEach(async ({ file }) => {
         const uid = uid4().replaceAll(/-/g, '');
         const url = `${category}/${uid}`;
         const imgRef = ref(storage, url);
-        imgPaths.push(url);
         uploadPromiseList.push(uploadBytes(imgRef, file));
+        imgRefList.push(imgRef);
       });
 
       await Promise.all(uploadPromiseList);
+
+      const urls = await Promise.all(
+        imgRefList.map((iRef) => getDownloadURL(iRef))
+      );
+
       addContent({
         id: uniqueId() + '',
         authorEmail: user.email,
-        imagePaths: imgPaths,
-        mainImagePath: imgPaths[0],
+        imagePaths: urls,
+        mainImagePath: urls[0],
         title,
         type: category,
         created: Date.now(),
