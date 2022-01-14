@@ -38,6 +38,7 @@ export function VerticalContentBox({ title, contents }: IProps) {
             type={item.type}
             imgPath={item.mainImagePath}
             title={item.title}
+            content={item.content}
           />
         ))}
       </div>

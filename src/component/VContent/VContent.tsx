@@ -8,9 +8,10 @@ interface IProps {
   id: string;
   type: EContentType;
   imgPath: string;
+  content: string;
 }
 
-export function VContent({ id, type, imgPath }: IProps) {
+export function VContent({ id, type, imgPath, content }: IProps) {
   return (
     <Link to={`/detail/${type}/${id}`} className={cls(styles.container)}>
       <picture className={cls(styles.pictureBox)}>
@@ -20,10 +21,7 @@ export function VContent({ id, type, imgPath }: IProps) {
           className={cls(styles.imageBox)}
         />
       </picture>
-      <p className={cls(styles.detail)}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi,
-        veniam.
-      </p>
+      <p className={cls(styles.detail)}>{content}</p>
     </Link>
   );
 }

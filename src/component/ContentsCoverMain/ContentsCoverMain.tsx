@@ -43,6 +43,7 @@ export function ContentsCoverMain() {
             id={item.id}
             type={item.type}
             imgPath={item.mainImagePath}
+            content={item.content}
           />
         </div>
       ))}
