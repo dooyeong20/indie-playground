@@ -5,6 +5,7 @@ const reviews: TContent[] = [
     id: '23',
     title: 'tmp title',
     type: EContentType.review,
+    created: 1642126403507,
     authorEmail: '',
     imagePaths: [],
     mainImagePath:
@@ -14,6 +15,7 @@ const reviews: TContent[] = [
     id: '24',
     title: 'tmp title',
     type: EContentType.review,
+    created: 1642126403507,
     authorEmail: '',
     imagePaths: [],
     mainImagePath:
@@ -23,6 +25,7 @@ const reviews: TContent[] = [
     id: '25',
     title: 'tmp title',
     type: EContentType.review,
+    created: 1642126403507,
     authorEmail: '',
     imagePaths: [],
     mainImagePath:
@@ -32,6 +35,7 @@ const reviews: TContent[] = [
     id: '26',
     title: 'tmp title',
     type: EContentType.review,
+    created: 1642126403507,
     authorEmail: '',
     imagePaths: [],
     mainImagePath:
@@ -41,6 +45,7 @@ const reviews: TContent[] = [
     id: '27',
     title: 'tmp title',
     type: EContentType.review,
+    created: 1642126403507,
     authorEmail: '',
     imagePaths: [],
     mainImagePath:

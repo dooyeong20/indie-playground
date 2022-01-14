@@ -7,6 +7,7 @@ const posts: TContent[] = [
     authorEmail: '',
     imagePaths: [],
     type: EContentType.post,
+    created: 1642126403507,
     mainImagePath:
       'https://play-lh.googleusercontent.com/2_M3GXptvR4z83AuWce9xAKKKhCOEZLVOeediIMRSe5hcKApDmLVefT9q8xpZZrWTB0=s96-rw',
   },
@@ -16,6 +17,7 @@ const posts: TContent[] = [
     authorEmail: '',
     imagePaths: [],
     type: EContentType.post,
+    created: 1642126403507,
     mainImagePath:
       'https://play-lh.googleusercontent.com/8DtlOHx-zIncYJE-kwHnOTBXycjAzwufkuk0uad7_MzWP17auA24THldTwhEru-b-7I=s128-rw',
   },
@@ -25,6 +27,7 @@ const posts: TContent[] = [
     authorEmail: '',
     imagePaths: [],
     type: EContentType.post,
+    created: 1642126403507,
     mainImagePath:
       'https://play-lh.googleusercontent.com/a7xhCHImKBVrcfDQMROm-kY40MxuRzkgobDQfYj3YvDDuDuR_pHPbg54FqhUm_OYDIE=w1052-h592-rw',
   },
@@ -34,6 +37,7 @@ const posts: TContent[] = [
     authorEmail: '',
     imagePaths: [],
     type: EContentType.post,
+    created: 1642126403507,
     mainImagePath:
       'https://play-lh.googleusercontent.com/lrLRup7kuMuc3c6R_DPC0SRA0_VaeJHTpwQuvY4OQuUjQ0tLxVhO4sWyO_T4OwGtikwz=s128-rw',
   },
@@ -43,6 +47,7 @@ const posts: TContent[] = [
     authorEmail: '',
     imagePaths: [],
     type: EContentType.post,
+    created: 1642126403507,
     mainImagePath:
       'https://play-lh.googleusercontent.com/DJexP6PO8dL06XvNrjG7plb7SW_SaxuNamO80ab512JA71lBEBUnaJCaZzlqWVrrlEiG=s128-rw',
   },
