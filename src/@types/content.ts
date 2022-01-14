@@ -12,5 +12,6 @@ export type TContent = {
   mainImagePath: string;
   imagePaths: string[];
   created: number;
+  content: string;
   rating?: number;
 };
