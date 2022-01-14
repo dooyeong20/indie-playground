@@ -69,6 +69,7 @@ export function WritePage() {
         mainImagePath: imgPaths[0],
         title,
         type: category,
+        created: Date.now(),
       });
     } catch (e) {
       console.error(e);
