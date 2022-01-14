@@ -105,3 +105,20 @@ export const signinUser = async (username: string, email: string) => {
 
   console.log(`${docRef.id} saved!`);
 };
+
+export const addContent = async ({
+  id,
+  mainImagePath,
+  imagePaths,
+  title,
+  type,
+}: TContent) => {
+  const docRef = await addDoc(collection(db, type), {
+    id,
+    mainImagePath,
+    imagePaths,
+    title,
+    type,
+  });
+  console.log(`${docRef.id} saved!`);
+};

@@ -4,13 +4,22 @@ import styles from './WritePage.module.css';
 import { BsStarFill, BsStar, BsPlus } from 'react-icons/bs';
 import { useRef } from 'react';
 import { useState } from 'react';
+import { v4 as uid4 } from 'uuid';
+import { uniqueId } from 'lodash';
 import { useSelector } from 'react-redux';
 import { TRootState } from '../../store';
+import { EContentType } from '../../@types';
+import { getStorage, ref, uploadBytes, UploadResult } from 'firebase//storage';
+import { addContent } from '../../DB';
+
 export function WritePage() {
   const user = useSelector((state: TRootState) => state.user);
   const imgRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<{ url: string; file: File }[]>([]);
+  const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const [category, setCategory] = useState<EContentType>(EContentType.post);
+  const [starCnt, setStarCnt] = useState(0);
 
   const handleFileSelect = () => {
     const files = imgRef.current?.files;
@@ -18,10 +27,12 @@ export function WritePage() {
       return;
     }
     const imageList: { url: string; file: File }[] = [];
+
     Array.from(files).forEach((file) => {
       const url = URL.createObjectURL(file);
       imageList.push({ url, file });
     });
+
     setImages([...images, ...imageList]);
   };
 
@@ -30,9 +41,55 @@ export function WritePage() {
     setContent(content);
   };
 
-  const handleWrite = () => {
+  const handleWrite = async () => {
+    console.log('----- NEW WRITE ------');
     console.log(user.displayName, user.email);
+    console.log(title);
     console.log(content);
+
+    const storage = getStorage();
+
+    try {
+      const uploadPromiseList: Promise<UploadResult>[] = [];
+      const imgPaths: string[] = [];
+
+      images.forEach(({ file }) => {
+        const uid = uid4().replaceAll(/-/g, '');
+        const url = `${category}/${uid}`;
+        const imgRef = ref(storage, url);
+        imgPaths.push(url);
+        uploadPromiseList.push(uploadBytes(imgRef, file));
+      });
+
+      await Promise.all(uploadPromiseList);
+      addContent({
+        id: uniqueId() + '',
+        authorEmail: user.email,
+        imagePaths: imgPaths,
+        mainImagePath: imgPaths[0],
+        title,
+        type: category,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const title = e.target.value;
+    setTitle(title);
+  };
+
+  const handleReviewCategory = () => {
+    setCategory(EContentType.review);
+  };
+
+  const handlePostCategory = () => {
+    setCategory(EContentType.post);
+  };
+
+  const handleStar = (idx: number) => () => {
+    setStarCnt(idx);
   };
 
   useEffect(() => {
@@ -42,16 +99,31 @@ export function WritePage() {
       });
     };
   }, [images]);
+
   return (
     <div className={cls(styles.container)}>
       <h2 className={cls(styles.heading)}>새 글쓰기</h2>
       <div className={cls(styles.catContainer)}>
         <span className={cls(styles.cat)}>카테고리</span>
         <div className={cls(styles.buttons)}>
-          <div role="button" className={cls(styles.button, styles.active)}>
+          <div
+            role="button"
+            className={cls(
+              styles.button,
+              category === EContentType.post ? styles.active : ''
+            )}
+            onClick={handlePostCategory}
+          >
             post
           </div>
-          <div role="button" className={cls(styles.button)}>
+          <div
+            role="button"
+            className={cls(
+              styles.button,
+              category === EContentType.review ? styles.active : ''
+            )}
+            onClick={handleReviewCategory}
+          >
             review
           </div>
         </div>
@@ -59,16 +131,23 @@ export function WritePage() {
       <div className={cls(styles.catContainer)}>
         <span className={cls(styles.cat)}>평점</span>
         <div className={cls(styles.buttons)}>
-          <BsStarFill />
-          <BsStarFill />
-          <BsStarFill />
-          <BsStar />
-          <BsStar />
+          {[1, 2, 3, 4, 5].map((idx: number) =>
+            idx <= starCnt ? (
+              <BsStarFill onClick={handleStar(idx)} />
+            ) : (
+              <BsStar onClick={handleStar(idx)} />
+            )
+          )}
         </div>
       </div>
       <div className={cls(styles.catContainer)}>
         <span className={cls(styles.cat)}>제목</span>
-        <input type="text" className={cls(styles.inputTitle)} />
+        <input
+          type="text"
+          className={cls(styles.inputTitle)}
+          onChange={handleTitleChange}
+          value={title}
+        />
       </div>
       <div className={cls(styles.catContainer, styles.noflex)}>
         <span className={cls(styles.cat, styles.picTitle)}>사진</span>

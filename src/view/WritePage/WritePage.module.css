@@ -22,6 +22,7 @@
 }
 .buttons {
   display: inline-flex;
+  gap: 5px;
 }
 .button {
   cursor: pointer;
@@ -45,6 +46,9 @@
   border-bottom: 1px solid black;
   flex: 1;
   height: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transform: translateY(10%);
 }
 .picContainer {
   overflow-x: auto;
@@ -96,6 +100,7 @@
   height: 30vh;
   outline: none;
   border-radius: 5px;
+  padding: 0.5rem;
 }
 .writeButton {
   text-align: center;
