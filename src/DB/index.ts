@@ -7,6 +7,7 @@ import {
   QuerySnapshot,
   where,
   addDoc,
+  orderBy,
 } from 'firebase/firestore';
 import { TContent } from '../@types';
 import { db } from '../firebase-config';
@@ -24,7 +25,11 @@ export const getReviews = async (count: number) => {
     return reviewsCache.get(count + '');
   }
   console.log('[fresh] reviews ...');
-  const q = query(collection(db, 'review'), limit(count));
+  const q = query(
+    collection(db, 'review'),
+    orderBy('created', 'desc'),
+    limit(count)
+  );
   reviewsCache.set(count + '', getDocs(q));
   return reviewsCache.get(count + '');
 };
@@ -35,7 +40,11 @@ export const getPosts = async (count: number) => {
     return postsCache.get(count + '');
   }
   console.log('[fresh] posts ...');
-  const q = query(collection(db, 'post'), limit(count));
+  const q = query(
+    collection(db, 'post'),
+    orderBy('created', 'desc'),
+    limit(count)
+  );
   postsCache.set(count + '', getDocs(q));
   return postsCache.get(count + '');
 };
@@ -110,6 +119,7 @@ export const addContent = async ({
   id,
   mainImagePath,
   imagePaths,
+  created,
   title,
   type,
 }: TContent) => {
@@ -119,6 +129,7 @@ export const addContent = async ({
     imagePaths,
     title,
     type,
+    created,
   });
   console.log(`${docRef.id} saved!`);
 };
