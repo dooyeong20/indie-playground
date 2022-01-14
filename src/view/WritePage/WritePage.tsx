@@ -82,6 +82,7 @@ export function WritePage() {
         title,
         type: category,
         created: Date.now(),
+        content,
       });
     } catch (e) {
       console.error(e);
