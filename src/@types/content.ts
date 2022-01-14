@@ -6,7 +6,10 @@ export enum EContentType {
 
 export type TContent = {
   id: string;
+  authorEmail: string;
   type: EContentType;
   title: string;
   mainImagePath: string;
+  imagePaths: string[];
+  rating?: number;
 };
