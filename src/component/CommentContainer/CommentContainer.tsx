@@ -1,46 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Rating } from '..';
+import { TComment } from '../../@types';
 import { cls } from '../../util';
 import styles from './CommentContainer.module.css';
 
-export function CommentContainer() {
+interface IProps {
+  onSubmitWrite: (comment: string) => void;
+  commentList: TComment[];
+}
+
+export function CommentContainer({ commentList, onSubmitWrite }: IProps) {
+  const [comment, setComment] = useState<string>('');
+
+  const handleWrite = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    onSubmitWrite(comment);
+    setComment('');
+  };
+
   return (
-    <div className={cls(styles.container)}>
-      <h2 className={cls(styles.title)}>댓글</h2>
-      <div className={cls(styles.commentInput)}>
-        <form action="#" className={cls(styles.textForm)}>
-          <textarea
-            name="comment"
-            id="comment"
-            className={cls(styles.textArea)}
-          />
-        </form>
-        <button type="submit" className={cls(styles.button)}>
-          쓰기
-        </button>
-      </div>
-      <div className={cls(styles.commentBox)}>
-        <div className={cls(styles.commentDetail)}>
-          <span className={cls(styles.authorName)}>Ariana Katelin</span>
-          <span className={cls(styles.date)}>2021. 11. 21</span>
+    <>
+      <div className={cls(styles.container)}>
+        <h2 className={cls(styles.title)}>댓글</h2>
+        <div className={cls(styles.commentInput)}>
+          <form action="#" className={cls(styles.textForm)}>
+            <textarea
+              name="comment"
+              id="comment"
+              value={comment}
+              className={cls(styles.textArea)}
+              onChange={handleWrite}
+            />
+          </form>
+          <button
+            type="submit"
+            className={cls(styles.button)}
+            onClick={handleSubmit}
+          >
+            쓰기
+          </button>
         </div>
-        <Rating rating={4} />
-        <p className={cls(styles.commentText)}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-          nam!
-        </p>
+        {commentList.map(({ author, content, created, rating, id }) => (
+          <div key={id} className={cls(styles.commentBox)}>
+            <div className={cls(styles.commentDetail)}>
+              <span className={cls(styles.authorName)}>{author}</span>
+              <span className={cls(styles.date)}>
+                {new Date(created).toLocaleString()}
+              </span>
+            </div>
+            <Rating rating={rating} />
+            <p className={cls(styles.commentText)}>{content}</p>
+          </div>
+        ))}
       </div>
-      <div className={cls(styles.commentBox)}>
-        <div className={cls(styles.commentDetail)}>
-          <span className={cls(styles.authorName)}>Ariana Katelin</span>
-          <span className={cls(styles.date)}>2021. 11. 21</span>
-        </div>
-        <Rating rating={3} />
-        <p className={cls(styles.commentText)}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-          nam!
-        </p>
-      </div>
-    </div>
+    </>
   );
 }

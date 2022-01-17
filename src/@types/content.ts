@@ -1,3 +1,5 @@
+import { DocumentData, DocumentReference } from 'firebase/firestore';
+
 export enum EContentType {
   all = 'all',
   post = 'post',
@@ -13,5 +15,14 @@ export type TContent = {
   imagePaths: string[];
   created: number;
   content: string;
+  comments: DocumentReference<DocumentData>[];
   rating?: number;
+};
+
+export type TComment = {
+  id: string;
+  author: string;
+  created: number;
+  content: string;
+  rating: number;
 };

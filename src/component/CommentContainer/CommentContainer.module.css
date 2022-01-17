@@ -1,3 +1,14 @@
+@keyframes apear {
+  from {
+    transform: scale(90%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(100%);
+    opacity: 1;
+  }
+}
+
 .container {
   width: 100%;
   max-width: 1000px;
@@ -39,6 +50,10 @@
 .commentBox {
   padding: 5px 0;
 }
+.commentBox:nth-child(3) {
+  animation: apear 1s normal 0s 1;
+}
+
 .authorName {
   display: block;
   font-size: 0.875rem;

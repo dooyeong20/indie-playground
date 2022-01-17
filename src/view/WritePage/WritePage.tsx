@@ -18,7 +18,6 @@ import {
   UploadResult,
 } from 'firebase//storage';
 import { addContent } from '../../DB';
-import { useNavigate } from 'react-router-dom';
 import { Loading } from '../../component';
 
 export function WritePage() {
@@ -30,8 +29,6 @@ export function WritePage() {
   const [category, setCategory] = useState<EContentType>(EContentType.post);
   const [starCnt, setStarCnt] = useState(0);
   const [loadingWrite, setLoadingWrite] = useState<boolean>(false);
-
-  const navigate = useNavigate();
 
   const handleFileSelect = () => {
     const files = imgRef.current?.files;
@@ -89,9 +86,10 @@ export function WritePage() {
         type: category,
         created: Date.now(),
         content,
+        comments: [],
       });
 
-      navigate('/');
+      window.location.href = '/';
     } catch (e) {
       console.error(e);
     }

@@ -8,9 +8,12 @@ import {
   where,
   addDoc,
   orderBy,
+  getDoc,
+  DocumentSnapshot,
 } from 'firebase/firestore';
-import { TContent } from '../@types';
+import { TComment, TContent } from '../@types';
 import { db } from '../firebase-config';
+import { getReversedList } from '../util';
 
 const detailCache = new Map<string, Promise<QuerySnapshot<DocumentData>>>();
 const reviewsCache = new Map<string, Promise<QuerySnapshot<DocumentData>>>();
@@ -124,6 +127,7 @@ export const addContent = async ({
   type,
   content,
   authorEmail,
+  comments,
 }: TContent) => {
   const docRef = await addDoc(collection(db, type), {
     id,
@@ -134,6 +138,36 @@ export const addContent = async ({
     created,
     content,
     authorEmail,
+    comments,
   });
   console.log(`${docRef.id} saved!`);
+};
+
+export const addComment = async ({
+  id,
+  author,
+  created,
+  content,
+  rating,
+}: TComment) => {
+  const docRef = await addDoc(collection(db, 'comment'), {
+    id,
+    author,
+    created,
+    content,
+    rating,
+  });
+
+  return docRef;
+};
+
+export const getCommentList = async (content: TContent) => {
+  const commentSnapPromises: Promise<DocumentSnapshot<DocumentData>>[] = [];
+
+  content.comments.forEach((commentRef) => {
+    commentSnapPromises.push(getDoc(commentRef));
+  });
+
+  const commentSnaps = getReversedList(await Promise.all(commentSnapPromises));
+  return commentSnaps.map((snap) => snap.data() as TComment);
 };
