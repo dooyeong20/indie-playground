@@ -85,12 +85,17 @@ export function Header() {
           Sign Up
         </NavLink>
         <NavLink
+          to="/write"
+          className={({ isActive }) =>
+            cls(isGuest() ? styles.hidden : '', isActive ? styles.active : '')
+          }
+        >
+          Write
+        </NavLink>
+        <NavLink
           to="/mypage"
           className={({ isActive }) =>
-            cls(
-              isGuest() ? styles.hidden : styles.sign,
-              isActive ? styles.active : ''
-            )
+            cls(isGuest() ? styles.hidden : '', isActive ? styles.active : '')
           }
         >
           My Page

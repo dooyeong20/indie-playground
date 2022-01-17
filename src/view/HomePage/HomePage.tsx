@@ -35,7 +35,10 @@ export function HomePage() {
 
   return (
     <>
-      <CarouselContainer title="HOT" contents={reviews} />
+      <CarouselContainer
+        title="HOT"
+        contents={reviews.map((review) => review.mainImagePath)}
+      />
       <HorizontalContentBox title={EContentType.post} contents={posts} />
       <VerticalContentBox title={EContentType.review} contents={reviews} />
     </>

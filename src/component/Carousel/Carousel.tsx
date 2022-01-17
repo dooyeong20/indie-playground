@@ -1,31 +1,32 @@
-import _ from 'lodash';
 import React, { useCallback, useState } from 'react';
+import { throttle, uniqueId } from 'lodash';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 import { Loading } from '..';
-import { TContent } from '../../@types';
 import { cls } from '../../util';
 import styles from './Carousel.module.css';
 
 interface IProps {
-  contents: TContent[];
+  imgSrcList: string[];
 }
 
-export function Carousel({ contents }: IProps) {
+export function Carousel({ imgSrcList }: IProps) {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const handleClickIndicator = (idx: number) => () => setCarouselIndex(idx);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handlePrev = useCallback(
-    _.throttle(() => {
-      setCarouselIndex((idx) => (idx + contents.length - 1) % contents.length);
+    throttle(() => {
+      setCarouselIndex(
+        (idx) => (idx + imgSrcList.length - 1) % imgSrcList.length
+      );
     }, 300),
-    [contents]
+    [imgSrcList]
   );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleNext = useCallback(
-    _.throttle(() => {
-      setCarouselIndex((idx) => (idx + 1) % contents.length);
+    throttle(() => {
+      setCarouselIndex((idx) => (idx + 1) % imgSrcList.length);
     }, 300),
-    [contents]
+    [imgSrcList]
   );
 
   return (
@@ -33,21 +34,21 @@ export function Carousel({ contents }: IProps) {
       <div
         className={cls(styles.imageBox)}
         style={{
-          width: `${contents.length || 1}00%`,
-          transform: `translateX(calc(100% / ${contents.length} * -1 * ${carouselIndex}))`,
+          width: `${imgSrcList.length || 1}00%`,
+          transform: `translateX(calc(100% / ${imgSrcList.length} * -1 * ${carouselIndex}))`,
         }}
       >
-        {!contents.length ? (
+        {!imgSrcList.length ? (
           <Loading />
         ) : (
-          contents.map((item) => (
+          imgSrcList.map((src) => (
             <img
-              key={_.uniqueId()}
-              src={item.mainImagePath}
+              key={uniqueId()}
+              src={src}
               alt="이미지"
               className={cls(styles.image)}
               style={{
-                width: `calc(100% / ${contents.length})`,
+                width: `calc(100% / ${imgSrcList.length})`,
               }}
               loading="lazy"
             />
@@ -55,9 +56,9 @@ export function Carousel({ contents }: IProps) {
         )}
       </div>
       <div className={cls(styles.indicatorContainer)}>
-        {contents.map((item, idx) => (
+        {imgSrcList.map((_, idx) => (
           <div
-            key={_.uniqueId()}
+            key={uniqueId()}
             className={cls(
               styles.indicator,
               idx === carouselIndex ? styles.active : ''
