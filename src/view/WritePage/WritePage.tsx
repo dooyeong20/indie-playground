@@ -5,8 +5,8 @@ import { BsStarFill, BsStar, BsPlus } from 'react-icons/bs';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { v4 as uid4 } from 'uuid';
-import { uniqueId } from 'lodash';
 import { useSelector } from 'react-redux';
+import { v4 as uidv4 } from 'uuid';
 import { TRootState } from '../../store';
 import { EContentType } from '../../@types';
 import {
@@ -18,6 +18,8 @@ import {
   UploadResult,
 } from 'firebase//storage';
 import { addContent } from '../../DB';
+import { useNavigate } from 'react-router-dom';
+import { Loading } from '../../component';
 
 export function WritePage() {
   const user = useSelector((state: TRootState) => state.user);
@@ -27,6 +29,9 @@ export function WritePage() {
   const [content, setContent] = useState<string>('');
   const [category, setCategory] = useState<EContentType>(EContentType.post);
   const [starCnt, setStarCnt] = useState(0);
+  const [loadingWrite, setLoadingWrite] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const handleFileSelect = () => {
     const files = imgRef.current?.files;
@@ -49,6 +54,7 @@ export function WritePage() {
   };
 
   const handleWrite = async () => {
+    setLoadingWrite(true);
     console.log('----- NEW WRITE ------');
     console.log(user.displayName, user.email);
     console.log(title);
@@ -74,8 +80,8 @@ export function WritePage() {
         imgRefList.map((iRef) => getDownloadURL(iRef))
       );
 
-      addContent({
-        id: uniqueId() + '',
+      await addContent({
+        id: uidv4().replaceAll(/-/g, ''),
         authorEmail: user.email,
         imagePaths: urls,
         mainImagePath: urls[0],
@@ -84,6 +90,8 @@ export function WritePage() {
         created: Date.now(),
         content,
       });
+
+      navigate('/');
     } catch (e) {
       console.error(e);
     }
@@ -115,108 +123,111 @@ export function WritePage() {
   }, [images]);
 
   return (
-    <div className={cls(styles.container)}>
-      <h2 className={cls(styles.heading)}>새 글쓰기</h2>
-      <div className={cls(styles.catContainer)}>
-        <span className={cls(styles.cat)}>카테고리</span>
-        <div className={cls(styles.buttons)}>
-          <div
-            role="button"
-            className={cls(
-              styles.button,
-              category === EContentType.post ? styles.active : ''
-            )}
-            onClick={handlePostCategory}
-          >
-            post
-          </div>
-          <div
-            role="button"
-            className={cls(
-              styles.button,
-              category === EContentType.review ? styles.active : ''
-            )}
-            onClick={handleReviewCategory}
-          >
-            review
+    <>
+      <div className={cls(styles.container)}>
+        <h2 className={cls(styles.heading)}>새 글쓰기</h2>
+        <div className={cls(styles.catContainer)}>
+          <span className={cls(styles.cat)}>카테고리</span>
+          <div className={cls(styles.buttons)}>
+            <div
+              role="button"
+              className={cls(
+                styles.button,
+                category === EContentType.post ? styles.active : ''
+              )}
+              onClick={handlePostCategory}
+            >
+              post
+            </div>
+            <div
+              role="button"
+              className={cls(
+                styles.button,
+                category === EContentType.review ? styles.active : ''
+              )}
+              onClick={handleReviewCategory}
+            >
+              review
+            </div>
           </div>
         </div>
-      </div>
-      <div className={cls(styles.catContainer)}>
-        <span className={cls(styles.cat)}>평점</span>
-        <div className={cls(styles.buttons)}>
-          {[1, 2, 3, 4, 5].map((idx: number) =>
-            idx <= starCnt ? (
-              <BsStarFill onClick={handleStar(idx)} />
-            ) : (
-              <BsStar onClick={handleStar(idx)} />
-            )
-          )}
+        <div className={cls(styles.catContainer)}>
+          <span className={cls(styles.cat)}>평점</span>
+          <div className={cls(styles.buttons)}>
+            {[1, 2, 3, 4, 5].map((idx: number) =>
+              idx <= starCnt ? (
+                <BsStarFill key={idx} onClick={handleStar(idx)} />
+              ) : (
+                <BsStar key={idx} onClick={handleStar(idx)} />
+              )
+            )}
+          </div>
         </div>
-      </div>
-      <div className={cls(styles.catContainer)}>
-        <span className={cls(styles.cat)}>제목</span>
-        <input
-          type="text"
-          className={cls(styles.inputTitle)}
-          onChange={handleTitleChange}
-          value={title}
-        />
-      </div>
-      <div className={cls(styles.catContainer, styles.noflex)}>
-        <span className={cls(styles.cat, styles.picTitle)}>사진</span>
-        <div className={cls(styles.picContainer)}>
-          <div
-            className={cls(styles.scrollLongBox)}
-            style={{
-              width: `${
-                130 * images.length + 20 * (images.length - 1) + 120
-              }px`,
-            }}
-          >
-            {images.map(({ url }) => (
-              <div key={url} className={cls(styles.preview)}>
-                <div className={cls(styles.imgWrapper)}>
-                  <img
-                    className={cls(styles.previewImg)}
-                    src={url}
-                    alt="업로드 이미지 미리보기"
-                  />
+        <div className={cls(styles.catContainer)}>
+          <span className={cls(styles.cat)}>제목</span>
+          <input
+            type="text"
+            className={cls(styles.inputTitle)}
+            onChange={handleTitleChange}
+            value={title}
+          />
+        </div>
+        <div className={cls(styles.catContainer, styles.noflex)}>
+          <span className={cls(styles.cat, styles.picTitle)}>사진</span>
+          <div className={cls(styles.picContainer)}>
+            <div
+              className={cls(styles.scrollLongBox)}
+              style={{
+                width: `${
+                  130 * images.length + 20 * (images.length - 1) + 120
+                }px`,
+              }}
+            >
+              {images.map(({ url }) => (
+                <div key={url} className={cls(styles.preview)}>
+                  <div className={cls(styles.imgWrapper)}>
+                    <img
+                      className={cls(styles.previewImg)}
+                      src={url}
+                      alt="업로드 이미지 미리보기"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-            <label htmlFor="img" className={cls(styles.fileUpload)}>
-              <BsPlus style={{ width: '50px', height: '50px' }} />
-            </label>
+              ))}
+              <label htmlFor="img" className={cls(styles.fileUpload)}>
+                <BsPlus style={{ width: '50px', height: '50px' }} />
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={cls(styles.catContainer, styles.noflex)}>
-        <span className={cls(styles.cat, styles.picTitle)}>내용</span>
-        <textarea
-          className={cls(styles.contentArea)}
-          name="content"
-          id="content"
-          onChange={handleContentChange}
+        <div className={cls(styles.catContainer, styles.noflex)}>
+          <span className={cls(styles.cat, styles.picTitle)}>내용</span>
+          <textarea
+            className={cls(styles.contentArea)}
+            name="content"
+            id="content"
+            onChange={handleContentChange}
+          />
+        </div>
+        <input
+          ref={imgRef}
+          type="file"
+          name="img"
+          id="img"
+          accept="image/*"
+          multiple
+          onChange={handleFileSelect}
+          className={cls(styles.fileInput)}
         />
+        <div
+          className={cls(styles.writeButton)}
+          role="button"
+          onClick={handleWrite}
+        >
+          게시하기
+        </div>
       </div>
-      <input
-        ref={imgRef}
-        type="file"
-        name="img"
-        id="img"
-        accept="image/*"
-        multiple
-        onChange={handleFileSelect}
-        className={cls(styles.fileInput)}
-      />
-      <div
-        className={cls(styles.writeButton)}
-        role="button"
-        onClick={handleWrite}
-      >
-        게시하기
-      </div>
-    </div>
+      {loadingWrite && <Loading />}
+    </>
   );
 }

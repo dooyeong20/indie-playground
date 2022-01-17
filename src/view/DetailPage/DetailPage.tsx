@@ -5,6 +5,7 @@ import {
   CarouselContainer,
   CommentContainer,
   DetailTextContent,
+  Loading,
 } from '../../component';
 import { getDetail } from '../../DB';
 
@@ -26,16 +27,13 @@ export function DetailPage() {
   }, [id, category]);
 
   if (!content) {
-    return null;
+    return <Loading />;
   }
 
   return (
     <>
-      <CarouselContainer contents={[content]} />
-      <DetailTextContent
-        title={content.title}
-        text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo eveniet hic culpa, deleniti rem maiores, vero ullam, beatae minus repellat odio ab accusantium quas deserunt dolore temporibus minima voluptate modi."
-      />
+      <CarouselContainer contents={content.imagePaths} />
+      <DetailTextContent title={content.title} text={content.content} />
       <CommentContainer />
     </>
   );
