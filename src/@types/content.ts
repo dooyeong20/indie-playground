@@ -15,3 +15,11 @@ export type TContent = {
   content: string;
   rating?: number;
 };
+
+export type TComment = {
+  id: string;
+  author: string;
+  created: number;
+  content: string;
+  rating: number;
+};
