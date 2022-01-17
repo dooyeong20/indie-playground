@@ -89,6 +89,7 @@ export function WritePage() {
         type: category,
         created: Date.now(),
         content,
+        comments: [],
       });
 
       navigate('/');
