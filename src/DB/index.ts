@@ -127,6 +127,7 @@ export const addContent = async ({
   type,
   content,
   authorEmail,
+  comments,
 }: TContent) => {
   const docRef = await addDoc(collection(db, type), {
     id,
@@ -137,6 +138,7 @@ export const addContent = async ({
     created,
     content,
     authorEmail,
+    comments,
   });
   console.log(`${docRef.id} saved!`);
 };
