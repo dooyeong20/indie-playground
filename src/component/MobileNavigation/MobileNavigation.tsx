@@ -72,6 +72,17 @@ export function MobileNavigation({
           <li className={isGuest ? styles.hidden : ''}>
             <NavLink
               onClick={onClickCloseNav}
+              to="/write"
+              className={({ isActive }) =>
+                cls(styles.mobileNavItem, isActive ? styles.active : '')
+              }
+            >
+              Write
+            </NavLink>
+          </li>
+          <li className={isGuest ? styles.hidden : ''}>
+            <NavLink
+              onClick={onClickCloseNav}
               to="/mypage"
               className={({ isActive }) =>
                 cls(styles.mobileNavItem, isActive ? styles.active : '')
