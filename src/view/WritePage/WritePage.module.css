@@ -71,8 +71,6 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 50px;
   color: #fff;
 }
 .fileInput {
@@ -101,13 +99,54 @@
   outline: none;
   border-radius: 5px;
   padding: 0.5rem;
+  resize: vertical;
 }
 .writeButton {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   margin: auto;
   background-color: #4dbc7c;
   font-weight: 700;
   color: #fff;
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    margin-top: 2rem;
+    padding: 0 8rem;
+  }
+  .heading {
+    font-size: 1.5rem;
+  }
+  .catContainer {
+    margin: 2rem 0;
+  }
+  .cat {
+    font-size: 1.25rem;
+  }
+  .button {
+    font-size: 1.25rem;
+  }
+  .inputTitle {
+    font-size: 1.25rem;
+    height: 1.75rem;
+  }
+  .scrollLongBox {
+    height: 300px;
+  }
+  .preview {
+    width: 250px;
+  }
+  .contentArea {
+    font-size: 1.25rem;
+    padding: 1rem;
+  }
+  .writeButton {
+    width: 300px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
 }

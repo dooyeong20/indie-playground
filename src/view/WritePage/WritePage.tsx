@@ -8,7 +8,7 @@ import { v4 as uid4 } from 'uuid';
 import { useSelector } from 'react-redux';
 import { v4 as uidv4 } from 'uuid';
 import { TRootState } from '../../store';
-import { EContentType } from '../../@types';
+import { EContentType, EViewMode } from '../../@types';
 import {
   getDownloadURL,
   getStorage,
@@ -22,6 +22,7 @@ import { Loading } from '../../component';
 
 export function WritePage() {
   const user = useSelector((state: TRootState) => state.user);
+  const viewMode = useSelector((state: TRootState) => state.app.viewMode);
   const imgRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<{ url: string; file: File }[]>([]);
   const [title, setTitle] = useState<string>('');
@@ -29,6 +30,8 @@ export function WritePage() {
   const [category, setCategory] = useState<EContentType>(EContentType.post);
   const [starCnt, setStarCnt] = useState(0);
   const [loadingWrite, setLoadingWrite] = useState<boolean>(false);
+
+  const imgWidth = viewMode === EViewMode.mobile ? 130 : 250;
 
   const handleFileSelect = () => {
     const files = imgRef.current?.files;
@@ -154,9 +157,17 @@ export function WritePage() {
           <div className={cls(styles.buttons)}>
             {[1, 2, 3, 4, 5].map((idx: number) =>
               idx <= starCnt ? (
-                <BsStarFill key={idx} onClick={handleStar(idx)} />
+                <BsStarFill
+                  key={idx}
+                  onClick={handleStar(idx)}
+                  size={viewMode === EViewMode.mobile ? 16 : 24}
+                />
               ) : (
-                <BsStar key={idx} onClick={handleStar(idx)} />
+                <BsStar
+                  key={idx}
+                  onClick={handleStar(idx)}
+                  size={viewMode === EViewMode.mobile ? 16 : 24}
+                />
               )
             )}
           </div>
@@ -177,7 +188,7 @@ export function WritePage() {
               className={cls(styles.scrollLongBox)}
               style={{
                 width: `${
-                  130 * images.length + 20 * (images.length - 1) + 120
+                  imgWidth * images.length + 20 * (images.length - 1) + 120
                 }px`,
               }}
             >
@@ -193,7 +204,7 @@ export function WritePage() {
                 </div>
               ))}
               <label htmlFor="img" className={cls(styles.fileUpload)}>
-                <BsPlus style={{ width: '50px', height: '50px' }} />
+                <BsPlus size={viewMode === EViewMode.mobile ? 50 : 100} />
               </label>
             </div>
           </div>
