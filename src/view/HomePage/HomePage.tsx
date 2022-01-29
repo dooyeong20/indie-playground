@@ -15,7 +15,7 @@ export function HomePage() {
     const reviewList: TContent[] = [];
     const postList: TContent[] = [];
     const [reviewSnap, postSnap] = await Promise.all([
-      getReviews(5),
+      getReviews(6),
       getPosts(5),
     ]);
 
