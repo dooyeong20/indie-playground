@@ -1,15 +1,17 @@
 @keyframes rotate {
   from {
-    transform: rotate(0deg);
+    transform: translateY(0);
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(-100%);
   }
 }
 .container {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999999;
   align-items: center;
   top: 0;
   bottom: 0;
@@ -17,8 +19,25 @@
   right: 0;
 }
 .loader {
-  width: 70px;
-  height: 70px;
-  border: 2px solid var(--color-green);
-  animation: rotate 1.5s ease-in-out infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.75rem;
+  width: 100px;
+  height: 35px;
+  border-radius: 100px;
+  background-color: #4dbc7c;
+  animation: rotate 0.75s ease-in-out infinite alternate;
+}
+
+@media screen and (min-width: 800px) {
+  .loader {
+    font-weight: 700;
+    font-size: 1.5rem;
+    width: 170px;
+    height: 60px;
+    border-radius: 70px;
+  }
 }
